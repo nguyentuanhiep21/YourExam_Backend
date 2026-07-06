@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{baseUrl}}/weatherforecast"
+method: GET
+headers:
+  Accept: application/json
+examples: ./.resources/Get Weather Forecast.resources/examples
+order: 1000

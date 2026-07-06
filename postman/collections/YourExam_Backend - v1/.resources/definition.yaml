@@ -1,0 +1,4 @@
+$kind: collection
+name: YourExam_Backend | v1
+variables:
+  baseUrl: http://localhost:5233/
