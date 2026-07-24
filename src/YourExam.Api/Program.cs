@@ -10,6 +10,11 @@ builder.Services.AddControllers();
 // Configure MediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(YourExam.Application.DTOs.QuestionTemplateDto).Assembly));
 
+// Register Services
+builder.Services.AddScoped<YourExam.Application.Common.Rules.IFallbackRuleProvider, YourExam.Application.Common.Rules.FallbackRuleProvider>();
+builder.Services.AddScoped<YourExam.Application.Interfaces.IMathEvaluatorService, YourExam.Application.Services.MathEvaluatorService>();
+builder.Services.AddScoped<YourExam.Application.Interfaces.IVariableGeneratorService, YourExam.Application.Services.VariableGeneratorService>();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
