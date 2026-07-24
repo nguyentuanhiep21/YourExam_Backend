@@ -5,7 +5,7 @@ using YourExam.Application.Features.Exercises.Commands.GenerateExercise;
 namespace YourExam.Api.Controllers;
 
 [ApiController]
-[Route("api/v1/exercises")]
+[Route("api/exercises")]
 public class ExercisesController : ControllerBase
 {
     private readonly IMediator _mediator;
