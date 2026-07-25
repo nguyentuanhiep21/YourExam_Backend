@@ -13,6 +13,11 @@ public class QuestionTemplate
     public string Subject { get; set; } = string.Empty;
 
     /// <summary>
+    /// Khối lớp áp dụng (Ví dụ: 1, 2, 3, 4, 5).
+    /// </summary>
+    public int GradeLevel { get; set; }
+
+    /// <summary>
     /// Tên chủ đề kiến thức (Ví dụ: "Phép cộng trừ phạm vi 100", "Hình học").
     /// </summary>
     public string Topic { get; set; } = string.Empty;

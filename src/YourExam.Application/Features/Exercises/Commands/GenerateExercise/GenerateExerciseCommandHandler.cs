@@ -28,12 +28,19 @@ public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCo
 
         // 1. Fetch matching templates from DB. 
         // Lấy toàn bộ template phù hợp điều kiện để có list dự phòng random.
-        var matchingTemplates = await _dbContext.QuestionTemplates
+        var query = _dbContext.QuestionTemplates
             .Where(t => t.IsActive 
                         && t.Subject.ToLower() == request.Subject.ToLower()
+                        && t.GradeLevel == request.GradeLevel
                         && t.Difficulty == request.Difficulty
-                        && t.QuestionType == request.QuestionType)
-            .ToListAsync(cancellationToken);
+                        && t.QuestionType == request.QuestionType);
+
+        if (!string.IsNullOrEmpty(request.Topic))
+        {
+            query = query.Where(t => t.Topic.ToLower() == request.Topic.ToLower());
+        }
+
+        var matchingTemplates = await query.ToListAsync(cancellationToken);
 
         if (!matchingTemplates.Any())
         {

@@ -8,6 +8,7 @@ public class GenerateExerciseCommand : IRequest<GenerateExerciseResponse>
     public int Difficulty { get; set; }
     public int QuestionType { get; set; }
     public int GradeLevel { get; set; }
+    public string? Topic { get; set; }
     public int Quantity { get; set; } = 1;
 }
 
