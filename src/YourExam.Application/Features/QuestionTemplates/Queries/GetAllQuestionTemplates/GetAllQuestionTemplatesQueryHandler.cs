@@ -34,6 +34,7 @@ public class GetAllQuestionTemplatesQueryHandler : IRequestHandler<GetAllQuestio
         {
             Id = q.Id,
             Subject = q.Subject,
+            GradeLevel = q.GradeLevel,
             Topic = q.Topic,
             Difficulty = q.Difficulty,
             QuestionType = q.QuestionType,

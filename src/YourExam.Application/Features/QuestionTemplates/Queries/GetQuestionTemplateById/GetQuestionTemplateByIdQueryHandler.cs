@@ -26,6 +26,7 @@ public class GetQuestionTemplateByIdQueryHandler : IRequestHandler<GetQuestionTe
         {
             Id = template.Id,
             Subject = template.Subject,
+            GradeLevel = template.GradeLevel,
             Topic = template.Topic,
             Difficulty = template.Difficulty,
             QuestionType = template.QuestionType,

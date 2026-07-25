@@ -4,6 +4,7 @@ public class QuestionTemplateDto
 {
     public int Id { get; set; }
     public string Subject { get; set; } = string.Empty;
+    public int GradeLevel { get; set; }
     public string Topic { get; set; } = string.Empty;
     public int Difficulty { get; set; }
     public int QuestionType { get; set; }
