@@ -432,4 +432,6 @@ FodyWeavers.xsd
 .postman
 
 # Documentation
-docs/
+docs
+src/YourExam.Api/appsettings.Development.json
+src/YourExam.Api/appsettings.json

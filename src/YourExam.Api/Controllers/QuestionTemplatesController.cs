@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using YourExam.Application.DTOs;
 using YourExam.Application.Features.QuestionTemplates.Queries.GetAllQuestionTemplates;
 using YourExam.Application.Features.QuestionTemplates.Queries.GetQuestionTemplateById;
+using YourExam.Application.Features.QuestionTemplates.Commands.AutoGenerateTemplates;
 
 namespace YourExam.Api.Controllers;
 
@@ -29,10 +30,13 @@ public class QuestionTemplatesController : ControllerBase
     public async Task<ActionResult<QuestionTemplateDto>> GetById(int id)
     {
         var template = await _mediator.Send(new GetQuestionTemplateByIdQuery(id));
-        if (template == null)
-        {
-            return NotFound();
-        }
-        return Ok(template);
+        return template != null ? Ok(template) : NotFound();
+    }
+
+    [HttpPost("auto-generate")]
+    public async Task<ActionResult<int>> AutoGenerate([FromBody] AutoGenerateTemplatesCommand command)
+    {
+        var count = await _mediator.Send(command);
+        return Ok(new { Message = $"Đã tạo thành công {count} templates", Count = count });
     }
 }

@@ -14,6 +14,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(YourE
 builder.Services.AddScoped<YourExam.Application.Common.Rules.IFallbackRuleProvider, YourExam.Application.Common.Rules.FallbackRuleProvider>();
 builder.Services.AddScoped<YourExam.Application.Interfaces.IMathEvaluatorService, YourExam.Application.Services.MathEvaluatorService>();
 builder.Services.AddScoped<YourExam.Application.Interfaces.IVariableGeneratorService, YourExam.Application.Services.VariableGeneratorService>();
+builder.Services.AddHttpClient<YourExam.Application.Interfaces.IOpenRouterService, YourExam.Infrastructure.Services.OpenRouterService>();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
