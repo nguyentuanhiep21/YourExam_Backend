@@ -56,6 +56,11 @@ public class QuestionTemplate
     public string DistractorLogic { get; set; } = "[]";
     
     /// <summary>
+    /// Biến mục tiêu để ép dấu bằng (nếu có).
+    /// </summary>
+    public string? EqualTargetVariable { get; set; }
+    
+    /// <summary>
     /// Cờ đánh dấu Template này có đang được sử dụng hay không.
     /// </summary>
     public bool IsActive { get; set; } = true;

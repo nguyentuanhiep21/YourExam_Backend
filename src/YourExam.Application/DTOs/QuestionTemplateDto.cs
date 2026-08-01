@@ -30,6 +30,7 @@ public class QuestionTemplateDto
     /// Chuỗi JSON mảng các công thức nhiễu.
     /// Khi gọi API sinh đề, LLM trả về JSON Array, backend dùng JsonElement để nhận rồi lưu thành chuỗi này.
     /// </summary>
-    public string DistractorLogic { get; set; } = "[]";
+    public string DistractorLogic { get; set; } = string.Empty;
+    public string? EqualTargetVariable { get; set; }
     public bool IsActive { get; set; }
 }
