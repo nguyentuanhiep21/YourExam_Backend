@@ -1,0 +1,6 @@
+$kind: http-request
+name: trending new
+description: ""
+url: https://healthcareblog-backend.onrender.com/api/posts/trending-redis
+method: GET
+order: 921668906000222

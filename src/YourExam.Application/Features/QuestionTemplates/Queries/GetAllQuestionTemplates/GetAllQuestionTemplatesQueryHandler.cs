@@ -28,6 +28,21 @@ public class GetAllQuestionTemplatesQueryHandler : IRequestHandler<GetAllQuestio
             query = query.Where(q => q.Difficulty == request.Difficulty.Value);
         }
 
+        if (request.GradeLevel.HasValue)
+        {
+            query = query.Where(q => q.GradeLevel == request.GradeLevel.Value);
+        }
+
+        if (request.QuestionType.HasValue)
+        {
+            query = query.Where(q => q.QuestionType == request.QuestionType.Value);
+        }
+
+        if (request.Quantity.HasValue && request.Quantity.Value > 0)
+        {
+            query = query.Take(request.Quantity.Value);
+        }
+
         var templates = await query.ToListAsync(cancellationToken);
 
         return templates.Select(q => new QuestionTemplateDto

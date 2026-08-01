@@ -1,0 +1,27 @@
+$kind: http-request
+name: get template
+description: ""
+url: http://localhost:5233/api/question-templates?subject=Toán&gradeLevel=1&quantity=2&difficulty=1&questionType=
+method: GET
+queryParams:
+  - key: subject
+    value: Toán
+    disabled: false
+    description: ""
+  - key: gradeLevel
+    value: "1"
+    disabled: false
+    description: ""
+  - key: quantity
+    value: "2"
+    disabled: false
+    description: ""
+  - key: difficulty
+    value: "1"
+    disabled: false
+    description: ""
+  - key: questionType
+    value: ""
+    disabled: false
+    description: ""
+order: 4290509151954379

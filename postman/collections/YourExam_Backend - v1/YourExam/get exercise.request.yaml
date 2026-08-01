@@ -1,0 +1,22 @@
+$kind: http-request
+name: get exercise
+url: "{{baseUrl}}/api/exercises/generate"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"subject\": \"Toán\",\r
+
+    \  \"gradeLevel\": 2,\r
+
+    \  \"difficulty\": 1,\r
+
+    \  \"questionType\": 1,\r
+
+    \  \"topic\": \"\",\r
+
+    \  \"quantity\": 5\r
+
+    }"
+order: 1243025691429954

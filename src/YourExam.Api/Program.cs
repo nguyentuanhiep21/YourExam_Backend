@@ -16,6 +16,10 @@ builder.Services.AddScoped<YourExam.Application.Interfaces.IMathEvaluatorService
 builder.Services.AddScoped<YourExam.Application.Interfaces.IVariableGeneratorService, YourExam.Application.Services.VariableGeneratorService>();
 builder.Services.AddHttpClient<YourExam.Application.Interfaces.IOpenRouterService, YourExam.Infrastructure.Services.OpenRouterService>();
 
+// Register Question Generation Strategy
+builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorStrategy, YourExam.Application.Services.QuestionGeneration.Strategies.Grade1.MathGrade1CalculationStrategy>();
+builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorFactory, YourExam.Application.Services.QuestionGeneration.QuestionGeneratorFactory>();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 

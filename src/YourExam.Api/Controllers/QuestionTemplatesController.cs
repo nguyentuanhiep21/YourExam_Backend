@@ -19,9 +19,16 @@ public class QuestionTemplatesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<QuestionTemplateDto>>> GetAll([FromQuery] string? subject, [FromQuery] int? difficulty)
+    public async Task<ActionResult<List<QuestionTemplateDto>>> GetAll([FromQuery] string? subject, [FromQuery] int? difficulty, [FromQuery] int? gradeLevel, [FromQuery] int? questionType, [FromQuery] int? quantity)
     {
-        var query = new GetAllQuestionTemplatesQuery { Subject = subject, Difficulty = difficulty };
+        var query = new GetAllQuestionTemplatesQuery 
+        { 
+            Subject = subject, 
+            Difficulty = difficulty,
+            GradeLevel = gradeLevel,
+            QuestionType = questionType,
+            Quantity = quantity
+        };
         var templates = await _mediator.Send(query);
         return Ok(templates);
     }

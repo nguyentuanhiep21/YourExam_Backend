@@ -28,7 +28,7 @@ public class QuestionTemplate
     public int Difficulty { get; set; } 
 
     /// <summary>
-    /// Dạng bài tập (Ví dụ: 1: Trắc nghiệm, 2: Tự luận, 3: Đặt tính rồi tính).
+    /// Dạng bài tập (1: Calculation, 2: WordProblem, 3: Comparison, 4: FillInTheBlank).
     /// </summary>
     public int QuestionType { get; set; } 
 
@@ -39,6 +39,7 @@ public class QuestionTemplate
     
     /// <summary>
     /// Chuỗi JSON định nghĩa quy tắc random các biến số (Ví dụ: x nằm từ 10->50, y nằm từ 1->x).
+    /// Lưu ý: LLM trả về Object JSON. Backend parse bằng JsonElement rồi lưu thành chuỗi (string) này.
     /// Postgres sẽ tự map chuỗi này thành kiểu jsonb.
     /// </summary>
     public string VariablesConfig { get; set; } = "{}";
@@ -50,6 +51,7 @@ public class QuestionTemplate
     
     /// <summary>
     /// Chuỗi JSON định nghĩa thuật toán sinh ra các đáp án gây nhiễu (Dành cho câu trắc nghiệm).
+    /// Lưu ý: LLM trả về Array JSON. Backend parse bằng JsonElement rồi lưu thành chuỗi (string) này.
     /// </summary>
     public string DistractorLogic { get; set; } = "[]";
     

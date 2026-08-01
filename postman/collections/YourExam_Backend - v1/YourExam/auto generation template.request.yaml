@@ -1,0 +1,23 @@
+$kind: http-request
+name: auto generation template
+description: ""
+url: http://localhost:5233/api/question-templates/auto-generate
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"subject\": \"Toán\",\r
+
+    \  \"gradeLevel\": 1,\r
+
+    \  \"questionType\": 1,\r
+
+    \  \"easyQuantity\": 2,\r
+
+    \  \"mediumQuantity\": 2,\r
+
+    \  \"hardQuantity\": 1\r
+
+    }\r\n"
+order: 4175446700927486

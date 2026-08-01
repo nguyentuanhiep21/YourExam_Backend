@@ -15,7 +15,14 @@ public class MathEvaluatorService : IMathEvaluatorService
         }
 
         var result = e.Evaluate();
-        return Convert.ToDouble(result);
+        double finalResult = Convert.ToDouble(result);
+        
+        if (double.IsInfinity(finalResult) || double.IsNaN(finalResult))
+        {
+            throw new DivideByZeroException($"Biểu thức {expression} sinh ra lỗi Toán học (Infinity/NaN).");
+        }
+
+        return finalResult;
     }
 
     public bool EvaluateConstraint(string constraintExpression, Dictionary<string, double> variables)

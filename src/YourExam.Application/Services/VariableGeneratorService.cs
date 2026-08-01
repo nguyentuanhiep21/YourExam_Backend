@@ -31,7 +31,8 @@ public class VariableGeneratorService : IVariableGeneratorService
         }
 
         // Parse JSON
-        using var configDoc = JsonDocument.Parse(configJson);
+        var docOptions = new JsonDocumentOptions { AllowTrailingCommas = true, CommentHandling = JsonCommentHandling.Skip };
+        using var configDoc = JsonDocument.Parse(configJson, docOptions);
         var root = configDoc.RootElement;
         
         var variablesDef = root.TryGetProperty("variables", out var vProp) ? vProp : default;

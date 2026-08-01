@@ -1,0 +1,5 @@
+$kind: http-request
+name: get all template
+url: "{{baseUrl}}/api/question-templates"
+method: GET
+order: 1784841641920
