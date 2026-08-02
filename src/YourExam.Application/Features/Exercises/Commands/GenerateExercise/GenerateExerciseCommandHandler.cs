@@ -63,9 +63,10 @@ public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCo
                 response.Data.Add(generatedExercise);
                 generatedCount++;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // Nếu strategy throw lỗi (ví dụ không thể generate sau N lần thử), bỏ qua template này và thử template khác
+                Console.WriteLine($"[DEBUG] Error generating exercise from template {template.Id}: {ex}");
             }
         }
 

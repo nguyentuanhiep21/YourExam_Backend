@@ -57,6 +57,7 @@ public class GetAllQuestionTemplatesQueryHandler : IRequestHandler<GetAllQuestio
             VariablesConfig = q.VariablesConfig,
             AnswerFormula = q.AnswerFormula,
             DistractorLogic = q.DistractorLogic,
+            EqualTargetVariable = q.EqualTargetVariable,
             IsActive = q.IsActive
         }).ToList();
     }
