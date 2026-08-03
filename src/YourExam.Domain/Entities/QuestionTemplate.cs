@@ -61,6 +61,11 @@ public class QuestionTemplate
     public string? EqualTargetVariable { get; set; }
     
     /// <summary>
+    /// Mã template gốc để phân loại và tránh trùng lặp dạng bài.
+    /// </summary>
+    public string MasterTemplateId { get; set; } = string.Empty;
+    
+    /// <summary>
     /// Cờ đánh dấu Template này có đang được sử dụng hay không.
     /// </summary>
     public bool IsActive { get; set; } = true;
