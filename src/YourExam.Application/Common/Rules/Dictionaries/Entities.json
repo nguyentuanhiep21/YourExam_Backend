@@ -1,0 +1,168 @@
+{
+    "NhanVat": [
+        "An",
+        "Bình",
+        "Chi",
+        "Dũng",
+        "Hà",
+        "Linh",
+        "Minh",
+        "Nam",
+        "Phong",
+        "Mai",
+        "Lan",
+        "Vy",
+        "Tuấn",
+        "Đức",
+        "Ngọc"
+    ],
+    "NguoiCho": [
+        "Mẹ",
+        "Bố",
+        "Bà",
+        "Ông",
+        "Cô giáo",
+        "Thầy giáo",
+        "Anh trai",
+        "Chị gái"
+    ],
+    "VatThe_HoaQua": [
+        "quả táo",
+        "quả cam",
+        "quả dâu tây",
+        "chiếc kẹo",
+        "cái bánh",
+        "quả chuối",
+        "quả xoài"
+    ],
+    "VatThe_HocTap": [
+        "chiếc bút chì",
+        "quyển vở",
+        "cái thước kẻ",
+        "cục tẩy",
+        "chiếc bút màu",
+        "cái nhãn vở"
+    ],
+    "VatThe_DoChoi": [
+        "viên bi",
+        "chiếc ô tô đồ chơi",
+        "búp bê",
+        "quả bóng",
+        "khối lego",
+        "gấu bông"
+    ],
+    "VatThe_DongVat": [
+        "con chim",
+        "con gà",
+        "con thỏ",
+        "con cá",
+        "con vịt",
+        "con mèo",
+        "con chó"
+    ],
+    "VatThe_CayCoi": [
+        "cây hoa",
+        "bông hoa",
+        "chậu cây",
+        "cây bàng",
+        "cây ăn quả"
+    ],
+    "DiaDiem_CoDinh": [
+        "trên cành cây",
+        "trong rổ",
+        "trong hộp",
+        "trên bàn",
+        "trong sân",
+        "trong vườn"
+    ],
+    "DiaDiem_KinhDoanh": [
+        "Cửa hàng",
+        "Tiệm sách",
+        "Nông trại",
+        "Siêu thị"
+    ],
+    "PhuongTien": [
+        "xe bus",
+        "toa tàu",
+        "bãi xe ô tô",
+        "thuyền"
+    ],
+    "HanhDong_Tang_DoVat": [
+        "mua thêm",
+        "được tặng",
+        "nhặt được",
+        "tìm thấy",
+        "hái thêm"
+    ],
+    "HanhDong_Tang_DongVat": [
+        "bay đến đậu cùng",
+        "bơi thêm vào",
+        "chạy đến",
+        "nở thêm"
+    ],
+    "HanhDong_Giam_DoVat": [
+        "ăn mất",
+        "cho bạn",
+        "tặng bạn",
+        "làm rơi",
+        "làm hỏng",
+        "bán đi"
+    ],
+    "HanhDong_Giam_DongVat": [
+        "bay đi",
+        "bơi đi mất",
+        "chạy vào rừng",
+        "bò đi chỗ khác"
+    ],
+    "HanhDong_LenPhuongTien": [
+        "lên xe",
+        "lên tàu",
+        "chạy vào bãi",
+        "cập bến"
+    ],
+    "HanhDong_XuongPhuongTien": [
+        "xuống xe",
+        "rời tàu",
+        "chạy ra khỏi bãi",
+        "rời bến"
+    ],
+    "Nhom_DoiTuong": [
+        "Tổ 1",
+        "Tổ 2",
+        "Lớp 1A",
+        "Lớp 1B",
+        "Đội đỏ",
+        "Đội xanh"
+    ],
+    "VatThe_ThucAn": [
+        "chiếc bánh mì",
+        "hộp sữa",
+        "bánh quy",
+        "gói kẹo"
+    ],
+    "VatThe_DoDungSinhHoat": [
+        "cái cốc",
+        "chiếc bát",
+        "cái thìa",
+        "đôi đũa"
+    ],
+    "ThoiGian_TrongNgay": [
+        "Buổi sáng",
+        "Buổi chiều",
+        "Buổi tối",
+        "Hôm qua",
+        "Hôm nay"
+    ],
+    "HanhDong_HuuHinh_XepGom": [
+        "gấp được",
+        "xếp được",
+        "nhặt được",
+        "sưu tầm được"
+    ],
+    "HanhDong_HuuHinh_TieuThuChuyenGiao": [
+        "uống hết",
+        "dùng hết",
+        "cho đi",
+        "chuyển sang"
+    ]
+}

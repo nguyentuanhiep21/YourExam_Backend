@@ -1,7 +1,7 @@
 $kind: http-request
-name: get template
+name: local get template
 description: ""
-url: http://localhost:5233/api/question-templates?subject=Toán&gradeLevel=1&quantity=2&difficulty=1&questionType=
+url: http://localhost:5233/api/question-templates?subject=Toán&gradeLevel=1&quantity=3&difficulty=2&questionType=3
 method: GET
 queryParams:
   - key: subject
@@ -13,15 +13,15 @@ queryParams:
     disabled: false
     description: ""
   - key: quantity
-    value: "2"
+    value: "3"
     disabled: false
     description: ""
   - key: difficulty
-    value: "1"
+    value: "2"
     disabled: false
     description: ""
   - key: questionType
-    value: ""
+    value: "3"
     disabled: false
     description: ""
 order: 4290509151954379

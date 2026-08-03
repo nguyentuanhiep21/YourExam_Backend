@@ -1,0 +1,21 @@
+$kind: http-request
+name: local get exercise
+description: ""
+url: http://localhost:5233/api/exercises/generate
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"subject\": \"Toán\",\r
+
+    \  \"gradeLevel\": 1,\r
+
+    \  \"difficulty\": 1,\r
+
+    \  \"questionType\": 2,\r
+
+    \  \"quantity\": 1\r
+
+    }"
+order: 4378650011834164

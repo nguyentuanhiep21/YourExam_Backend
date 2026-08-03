@@ -35,6 +35,7 @@ public class GetQuestionTemplateByIdQueryHandler : IRequestHandler<GetQuestionTe
             AnswerFormula = template.AnswerFormula,
             DistractorLogic = template.DistractorLogic,
             EqualTargetVariable = template.EqualTargetVariable,
+            MasterTemplateId = template.MasterTemplateId,
             IsActive = template.IsActive
         };
     }

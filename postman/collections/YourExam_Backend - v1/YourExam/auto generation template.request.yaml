@@ -1,17 +1,38 @@
 $kind: http-request
 name: auto generation template
 description: ""
-url: http://localhost:5233/api/question-templates/auto-generate
-method: POST
+url: "{{baseUrl}}/api/question-templates?subject=Toán&gradeLevel=1&quantity=1&difficulty=3&questionType=4"
+method: GET
+queryParams:
+  - key: subject
+    value: Toán
+    disabled: false
+    description: ""
+  - key: gradeLevel
+    value: "1"
+    disabled: false
+    description: ""
+  - key: quantity
+    value: "1"
+    disabled: false
+    description: ""
+  - key: difficulty
+    value: "3"
+    disabled: false
+    description: ""
+  - key: questionType
+    value: "4"
+    disabled: false
+    description: ""
 body:
   type: json
   content: "{\r
 
     \  \"subject\": \"Toán\",\r
 
-    \  \"gradeLevel\": 1,\r
+    \  \"gradeLevel\": 3,\r
 
-    \  \"questionType\": 1,\r
+    \  \"questionType\": 2,\r
 
     \  \"easyQuantity\": 2,\r
 

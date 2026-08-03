@@ -1,0 +1,27 @@
+$kind: http-request
+name: cloud get template
+description: ""
+url: "{{baseUrl}}/api/question-templates?subject=Toán&gradeLevel=1&quantity=1&difficulty=1&questionType=2"
+method: GET
+queryParams:
+  - key: subject
+    value: Toán
+    disabled: false
+    description: ""
+  - key: gradeLevel
+    value: "1"
+    disabled: false
+    description: ""
+  - key: quantity
+    value: "1"
+    disabled: false
+    description: ""
+  - key: difficulty
+    value: "1"
+    disabled: false
+    description: ""
+  - key: questionType
+    value: "2"
+    disabled: false
+    description: ""
+order: 4367764946085433

@@ -1,5 +1,5 @@
 $kind: http-request
-name: get exercise
+name: cloud get exercise
 url: "{{baseUrl}}/api/exercises/generate"
 method: POST
 body:
@@ -8,15 +8,13 @@ body:
 
     \  \"subject\": \"Toán\",\r
 
-    \  \"gradeLevel\": 2,\r
+    \  \"gradeLevel\": 1,\r
 
     \  \"difficulty\": 1,\r
 
-    \  \"questionType\": 1,\r
+    \  \"questionType\": 2,\r
 
-    \  \"topic\": \"\",\r
-
-    \  \"quantity\": 5\r
+    \  \"quantity\": 1\r
 
     }"
 order: 1243025691429954

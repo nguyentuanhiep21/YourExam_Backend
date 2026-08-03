@@ -32,5 +32,6 @@ public class QuestionTemplateDto
     /// </summary>
     public string DistractorLogic { get; set; } = string.Empty;
     public string? EqualTargetVariable { get; set; }
+    public string MasterTemplateId { get; set; } = string.Empty;
     public bool IsActive { get; set; }
 }

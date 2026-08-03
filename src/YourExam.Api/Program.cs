@@ -14,12 +14,14 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(YourE
 builder.Services.AddScoped<YourExam.Application.Common.Rules.IFallbackRuleProvider, YourExam.Application.Common.Rules.FallbackRuleProvider>();
 builder.Services.AddScoped<YourExam.Application.Interfaces.IMathEvaluatorService, YourExam.Application.Services.MathEvaluatorService>();
 builder.Services.AddScoped<YourExam.Application.Interfaces.IVariableGeneratorService, YourExam.Application.Services.VariableGeneratorService>();
+builder.Services.AddSingleton<YourExam.Application.Interfaces.ITextVariableGeneratorService, YourExam.Infrastructure.Services.TextVariableGeneratorService>();
 builder.Services.AddHttpClient<YourExam.Application.Interfaces.IOpenRouterService, YourExam.Infrastructure.Services.OpenRouterService>();
 
 // Register Question Generation Strategy
 builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorStrategy, YourExam.Application.Services.QuestionGeneration.Strategies.Grade1.MathGrade1CalculationStrategy>();
 builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorStrategy, YourExam.Application.Services.QuestionGeneration.Strategies.Grade1.MathGrade1ComparisonStrategy>();
 builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorStrategy, YourExam.Application.Services.QuestionGeneration.Strategies.Grade1.MathGrade1FillInTheBlankStrategy>();
+builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorStrategy, YourExam.Application.Services.QuestionGeneration.Strategies.Grade1.MathGrade1WordProblemStrategy>();
 builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorFactory, YourExam.Application.Services.QuestionGeneration.QuestionGeneratorFactory>();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
