@@ -11,6 +11,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 // Supabase JWT Authentication
 var supabaseJwtSecret = builder.Configuration["Supabase:JwtSecret"]
     ?? throw new InvalidOperationException("Supabase:JwtSecret is not configured.");
@@ -76,8 +87,15 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+else 
+{
+    // Trên Production (nếu server tự quản lý SSL), bạn có thể bật lại HTTPS Redirection
+    // Tuy nhiên nếu dùng Nginx/Cloudflare/Railway thì họ tự cấu hình SSL rồi, nên đoạn này cũng thường không cần.
+    app.UseHttpsRedirection(); 
+}
 
-app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
