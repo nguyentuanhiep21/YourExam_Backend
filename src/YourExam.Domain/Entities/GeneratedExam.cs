@@ -11,7 +11,7 @@ public class GeneratedExam
     /// Khóa ngoại trỏ về User (Người đã bấm nút tạo đề thi này).
     /// </summary>
     public Guid AuthorId { get; set; }
-    public User Author { get; set; } = null!;
+    public Profile Author { get; set; } = null!;
     
     /// <summary>
     /// Khóa ngoại trỏ về Blueprint (Đề thi này được gen ra từ khung nào).

@@ -23,6 +23,7 @@ public class ExamBlueprint
     /// Dùng Guid để map chuẩn với bảng USERS.
     /// </summary>
     public Guid AuthorId { get; set; } 
+    public Profile Author { get; set; } = null!;
     
     // --- Navigation properties (phục vụ Entity Framework) ---
     

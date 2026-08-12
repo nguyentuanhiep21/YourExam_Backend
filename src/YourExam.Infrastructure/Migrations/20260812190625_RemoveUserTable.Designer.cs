@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using YourExam.Infrastructure.Data;
@@ -11,9 +12,11 @@ using YourExam.Infrastructure.Data;
 namespace YourExam.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260812190625_RemoveUserTable")]
+    partial class RemoveUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,8 +76,6 @@ namespace YourExam.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
                     b.ToTable("ExamBlueprints", (string)null);
                 });
 
@@ -123,48 +124,9 @@ namespace YourExam.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
                     b.HasIndex("BlueprintId");
 
                     b.ToTable("GeneratedExams", (string)null);
-                });
-
-            modelBuilder.Entity("YourExam.Domain.Entities.Profile", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("AvatarUrl")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<string>("School")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SubjectsTaught")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Profiles", (string)null);
                 });
 
             modelBuilder.Entity("YourExam.Domain.Entities.QuestionTemplate", b =>
@@ -239,8 +201,6 @@ namespace YourExam.Infrastructure.Migrations
 
                     b.HasKey("ExamId", "UserId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Votes", (string)null);
                 });
 
@@ -255,32 +215,13 @@ namespace YourExam.Infrastructure.Migrations
                     b.Navigation("Blueprint");
                 });
 
-            modelBuilder.Entity("YourExam.Domain.Entities.ExamBlueprint", b =>
-                {
-                    b.HasOne("YourExam.Domain.Entities.Profile", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-                });
-
             modelBuilder.Entity("YourExam.Domain.Entities.GeneratedExam", b =>
                 {
-                    b.HasOne("YourExam.Domain.Entities.Profile", "Author")
-                        .WithMany("GeneratedExams")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("YourExam.Domain.Entities.ExamBlueprint", "Blueprint")
                         .WithMany("GeneratedExams")
                         .HasForeignKey("BlueprintId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Author");
 
                     b.Navigation("Blueprint");
                 });
@@ -293,15 +234,7 @@ namespace YourExam.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("YourExam.Domain.Entities.Profile", "User")
-                        .WithMany("Votes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Exam");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("YourExam.Domain.Entities.ExamBlueprint", b =>
@@ -313,13 +246,6 @@ namespace YourExam.Infrastructure.Migrations
 
             modelBuilder.Entity("YourExam.Domain.Entities.GeneratedExam", b =>
                 {
-                    b.Navigation("Votes");
-                });
-
-            modelBuilder.Entity("YourExam.Domain.Entities.Profile", b =>
-                {
-                    b.Navigation("GeneratedExams");
-
                     b.Navigation("Votes");
                 });
 #pragma warning restore 612, 618

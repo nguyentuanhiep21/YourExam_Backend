@@ -10,7 +10,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
     }
 
-    public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Profile> Profiles { get; set; } = null!;
     public DbSet<QuestionTemplate> QuestionTemplates { get; set; } = null!;
     public DbSet<ExamBlueprint> ExamBlueprints { get; set; } = null!;
     public DbSet<BlueprintRule> BlueprintRules { get; set; } = null!;
@@ -21,13 +21,14 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // 1. Cấu hình bảng User
-        modelBuilder.Entity<User>(entity =>
+        // 1. Cấu hình bảng Profile
+        modelBuilder.Entity<Profile>(entity =>
         {
-            entity.ToTable("Users");
-            entity.HasKey(e => e.Id); // Khai báo Khóa Chính rõ ràng
+            entity.ToTable("Profiles");
+            entity.HasKey(e => e.Id);
             entity.Property(e => e.Email).IsRequired().HasMaxLength(255);
             entity.Property(e => e.FullName).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(20);
         });
 
         // 2. Cấu hình bảng QuestionTemplate
@@ -46,11 +47,11 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             entity.ToTable("ExamBlueprints");
             entity.HasKey(e => e.Id);
             
-            // Khai báo Khóa Ngoại trỏ về User (Tác giả)
-            entity.HasOne<User>()
+            // Khai báo Khóa Ngoại trỏ về Profile (Tác giả)
+            entity.HasOne(e => e.Author)
                   .WithMany()
                   .HasForeignKey(e => e.AuthorId)
-                  .OnDelete(DeleteBehavior.SetNull); // Nếu xóa User, Blueprint vẫn giữ nhưng Author = null
+                  .OnDelete(DeleteBehavior.SetNull);
         });
 
         // 4. Cấu hình bảng BlueprintRule
@@ -72,12 +73,12 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             entity.ToTable("GeneratedExams");
             entity.HasKey(e => e.Id);
             
-            // Khai báo Khóa Ngoại trỏ về Tác giả (User)
+            // Khai báo Khóa Ngoại trỏ về Tác giả (Profile)
             entity.HasOne(e => e.Author)
                   .WithMany(u => u.GeneratedExams)
                   .HasForeignKey(e => e.AuthorId)
                   .OnDelete(DeleteBehavior.Cascade);
-                  
+
             // Khai báo Khóa Ngoại trỏ về Khung đề (ExamBlueprint)
             entity.HasOne(e => e.Blueprint)
                   .WithMany(b => b.GeneratedExams)
@@ -99,7 +100,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
                   .HasForeignKey(e => e.ExamId)
                   .OnDelete(DeleteBehavior.Cascade);
                   
-            // Khai báo Khóa Ngoại trỏ về User
+            // Khai báo Khóa Ngoại trỏ về Profile
             entity.HasOne(e => e.User)
                   .WithMany(u => u.Votes)
                   .HasForeignKey(e => e.UserId)

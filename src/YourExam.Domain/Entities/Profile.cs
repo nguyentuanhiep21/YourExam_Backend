@@ -1,9 +1,9 @@
 namespace YourExam.Domain.Entities;
 
-public class User
+public class Profile
 {
     /// <summary>
-    /// Khóa chính của bảng. Sử dụng Guid để map trực tiếp 1-1 với ID của Supabase Auth.
+    /// Khóa chính của bảng. Dùng Guid để map trực tiếp 1-1 với ID của Supabase Auth.
     /// </summary>
     public Guid Id { get; set; } 
 
@@ -16,6 +16,11 @@ public class User
     /// Họ và tên hiển thị của giáo viên/người dùng.
     /// </summary>
     public string FullName { get; set; } = string.Empty;
+    
+    /// <summary>
+    /// Số điện thoại liên hệ (Tùy chọn).
+    /// </summary>
+    public string? PhoneNumber { get; set; }
 
     /// <summary>
     /// Tên trường nơi giáo viên đang công tác (Tùy chọn).

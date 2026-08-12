@@ -12,7 +12,7 @@ public class Vote
     /// Khóa ngoại trỏ về User đã vote. Đóng vai trò là phần còn lại của Composite Primary Key.
     /// </summary>
     public Guid UserId { get; set; }
-    public User User { get; set; } = null!;
+    public Profile User { get; set; } = null!;
     
     /// <summary>
     /// Loại Vote: 'true' nghĩa là Upvote (Thích), 'false' nghĩa là Downvote (Không thích).
