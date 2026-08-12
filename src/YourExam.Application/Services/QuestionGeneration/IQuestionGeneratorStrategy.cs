@@ -6,6 +6,6 @@ namespace YourExam.Application.Services.QuestionGeneration;
 
 public interface IQuestionGeneratorStrategy
 {
-    bool CanHandle(string subject, int gradeLevel, int questionType);
+    bool CanHandle(string subject, int gradeLevel, Domain.Enums.ExerciseType exerciseType);
     Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template);
 }

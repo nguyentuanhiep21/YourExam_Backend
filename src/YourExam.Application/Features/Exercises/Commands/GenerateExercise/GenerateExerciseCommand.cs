@@ -6,7 +6,7 @@ public class GenerateExerciseCommand : IRequest<GenerateExerciseResponse>
 {
     public string Subject { get; set; } = string.Empty;
     public int Difficulty { get; set; }
-    public int QuestionType { get; set; }
+    public Domain.Enums.ExerciseType ExerciseType { get; set; }
     public int GradeLevel { get; set; }
     public string? Topic { get; set; }
     public int Quantity { get; set; } = 1;

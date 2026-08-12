@@ -28,9 +28,9 @@ public class QuestionTemplate
     public int Difficulty { get; set; } 
 
     /// <summary>
-    /// Dạng bài tập (1: Calculation, 2: WordProblem, 3: Comparison, 4: FillInTheBlank).
+    /// Dạng bài tập toán học.
     /// </summary>
-    public int QuestionType { get; set; } 
+    public Enums.ExerciseType ExerciseType { get; set; } 
 
     /// <summary>
     /// Khung nội dung câu hỏi chứa các biến. Ví dụ: "Lan có {x} quả táo, Lan cho Hoa {y} quả táo. Hỏi Lan còn bao nhiêu quả?".

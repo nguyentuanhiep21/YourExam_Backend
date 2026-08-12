@@ -29,7 +29,7 @@ public class GetQuestionTemplateByIdQueryHandler : IRequestHandler<GetQuestionTe
             GradeLevel = template.GradeLevel,
             Topic = template.Topic,
             Difficulty = template.Difficulty,
-            QuestionType = template.QuestionType,
+            ExerciseType = template.ExerciseType,
             ContentTemplate = template.ContentTemplate,
             VariablesConfig = template.VariablesConfig,
             AnswerFormula = template.AnswerFormula,

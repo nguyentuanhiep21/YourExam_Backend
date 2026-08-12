@@ -22,11 +22,11 @@ public class MathGrade1FillInTheBlankStrategy : IQuestionGeneratorStrategy
         _mathEvaluator = mathEvaluator;
     }
 
-    public bool CanHandle(string subject, int gradeLevel, int questionType)
+    public bool CanHandle(string subject, int gradeLevel, Domain.Enums.ExerciseType exerciseType)
     {
-        return subject.Equals("Toán", StringComparison.OrdinalIgnoreCase)
-            && gradeLevel == 1
-            && questionType == 4; // 4 = FillInTheBlank
+        return subject.Equals("Toán", StringComparison.OrdinalIgnoreCase) 
+            && gradeLevel == 1 
+            && exerciseType == Domain.Enums.ExerciseType.FillInTheBlank;
     }
 
     public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template)

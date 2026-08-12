@@ -24,9 +24,9 @@ public class BlueprintRule
     public int Difficulty { get; set; }
 
     /// <summary>
-    /// Dạng bài yêu cầu (Ví dụ: 1: Trắc nghiệm, 2: Tự luận).
+    /// Hình thức trả lời yêu cầu (Ví dụ: 1: Trắc nghiệm, 2: Tự luận).
     /// </summary>
-    public int QuestionType { get; set; }
+    public Enums.QuestionFormat QuestionFormat { get; set; }
 
     /// <summary>
     /// Số lượng câu hỏi ngẫu nhiên cần bốc thỏa mãn các tiêu chí trên.

@@ -28,7 +28,7 @@ public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCo
                         && t.Subject.ToLower() == request.Subject.ToLower()
                         && t.GradeLevel == request.GradeLevel
                         && t.Difficulty == request.Difficulty
-                        && t.QuestionType == request.QuestionType);
+                        && t.ExerciseType == request.ExerciseType);
 
         if (!string.IsNullOrEmpty(request.Topic))
         {
@@ -43,7 +43,7 @@ public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCo
         }
 
         // Lấy strategy từ Factory dựa trên request
-        var strategy = _questionGeneratorFactory.GetStrategy(request.Subject, request.GradeLevel, request.QuestionType);
+        var strategy = _questionGeneratorFactory.GetStrategy(request.Subject, request.GradeLevel, request.ExerciseType);
 
         // Trộn mảng ngẫu nhiên (Shuffle in-memory)
         var random = new Random();

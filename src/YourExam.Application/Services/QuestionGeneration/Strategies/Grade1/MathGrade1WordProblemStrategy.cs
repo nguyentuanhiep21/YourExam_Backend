@@ -25,11 +25,11 @@ public class MathGrade1WordProblemStrategy : IQuestionGeneratorStrategy
         _textVariableGenerator = textVariableGenerator;
     }
 
-    public bool CanHandle(string subject, int gradeLevel, int questionType)
+    public bool CanHandle(string subject, int gradeLevel, Domain.Enums.ExerciseType exerciseType)
     {
         return subject.Equals("Toán", StringComparison.OrdinalIgnoreCase) 
             && gradeLevel == 1 
-            && questionType == 2; // 2 = WordProblem
+            && exerciseType == Domain.Enums.ExerciseType.WordProblem; // 2 = WordProblem
     }
 
     public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template)

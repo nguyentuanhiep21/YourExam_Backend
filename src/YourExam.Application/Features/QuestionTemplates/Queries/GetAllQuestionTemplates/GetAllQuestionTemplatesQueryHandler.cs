@@ -33,9 +33,9 @@ public class GetAllQuestionTemplatesQueryHandler : IRequestHandler<GetAllQuestio
             query = query.Where(q => q.GradeLevel == request.GradeLevel.Value);
         }
 
-        if (request.QuestionType.HasValue)
+        if (request.ExerciseType.HasValue)
         {
-            query = query.Where(q => q.QuestionType == request.QuestionType.Value);
+            query = query.Where(q => q.ExerciseType == request.ExerciseType.Value);
         }
 
         if (request.Quantity.HasValue && request.Quantity.Value > 0)
@@ -52,7 +52,7 @@ public class GetAllQuestionTemplatesQueryHandler : IRequestHandler<GetAllQuestio
             GradeLevel = q.GradeLevel,
             Topic = q.Topic,
             Difficulty = q.Difficulty,
-            QuestionType = q.QuestionType,
+            ExerciseType = q.ExerciseType,
             ContentTemplate = q.ContentTemplate,
             VariablesConfig = q.VariablesConfig,
             AnswerFormula = q.AnswerFormula,

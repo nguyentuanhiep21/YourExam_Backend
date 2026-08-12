@@ -13,12 +13,12 @@ public class QuestionGeneratorFactory : IQuestionGeneratorFactory
         _strategies = strategies;
     }
 
-    public IQuestionGeneratorStrategy GetStrategy(string subject, int gradeLevel, int questionType)
+    public IQuestionGeneratorStrategy GetStrategy(string subject, int gradeLevel, Domain.Enums.ExerciseType exerciseType)
     {
-        var strategy = _strategies.FirstOrDefault(s => s.CanHandle(subject, gradeLevel, questionType));
+        var strategy = _strategies.FirstOrDefault(s => s.CanHandle(subject, gradeLevel, exerciseType));
         if (strategy == null) 
         {
-            throw new NotSupportedException($"Chưa có luồng xử lý sinh đề cho Môn {subject} - Lớp {gradeLevel} - Dạng bài {questionType}");
+            throw new NotSupportedException($"Chưa có luồng xử lý sinh đề cho Môn {subject} - Lớp {gradeLevel} - Dạng bài {exerciseType}");
         }
         return strategy;
     }

@@ -21,11 +21,11 @@ public class MathGrade1ComparisonStrategy : IQuestionGeneratorStrategy
         _mathEvaluator = mathEvaluator;
     }
 
-    public bool CanHandle(string subject, int gradeLevel, int questionType)
+    public bool CanHandle(string subject, int gradeLevel, Domain.Enums.ExerciseType exerciseType)
     {
         return subject.Equals("Toán", StringComparison.OrdinalIgnoreCase) 
             && gradeLevel == 1 
-            && questionType == 3; // 3 = Comparison
+            && exerciseType == Domain.Enums.ExerciseType.Comparison; // 3 = Comparison
     }
 
     public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template)

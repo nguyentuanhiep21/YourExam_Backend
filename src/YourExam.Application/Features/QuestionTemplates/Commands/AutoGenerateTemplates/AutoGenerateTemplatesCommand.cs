@@ -6,7 +6,7 @@ public class AutoGenerateTemplatesCommand : IRequest<int>
 {
     public string Subject { get; set; } = "Toán";
     public int GradeLevel { get; set; }
-    public int QuestionType { get; set; }
+    public Domain.Enums.ExerciseType ExerciseType { get; set; }
     
     public int EasyQuantity { get; set; }
     public int MediumQuantity { get; set; }

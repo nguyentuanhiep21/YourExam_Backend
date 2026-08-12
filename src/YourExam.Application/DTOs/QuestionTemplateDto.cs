@@ -12,9 +12,9 @@ public class QuestionTemplateDto
     public int Difficulty { get; set; }
     
     /// <summary>
-    /// Dạng bài tập (1: Calculation, 2: WordProblem, 3: Comparison, 4: FillInTheBlank).
+    /// Dạng bài tập toán học.
     /// </summary>
-    public int QuestionType { get; set; }
+    public Domain.Enums.ExerciseType ExerciseType { get; set; }
     
     public string ContentTemplate { get; set; } = string.Empty;
     
