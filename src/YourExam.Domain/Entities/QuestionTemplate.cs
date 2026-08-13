@@ -33,6 +33,11 @@ public class QuestionTemplate
     public Enums.ExerciseType ExerciseType { get; set; } 
 
     /// <summary>
+    /// Hình thức trả lời (Ví dụ: Trắc nghiệm, Tự luận).
+    /// </summary>
+    public Enums.QuestionFormat QuestionFormat { get; set; }
+
+    /// <summary>
     /// Khung nội dung câu hỏi chứa các biến. Ví dụ: "Lan có {x} quả táo, Lan cho Hoa {y} quả táo. Hỏi Lan còn bao nhiêu quả?".
     /// </summary>
     public string ContentTemplate { get; set; } = string.Empty;

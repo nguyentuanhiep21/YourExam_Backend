@@ -29,6 +29,11 @@ public class BlueprintRule
     public Enums.QuestionFormat QuestionFormat { get; set; }
 
     /// <summary>
+    /// Dạng bài tập yêu cầu (Ví dụ: Có lời giải, Điền số, Điền dấu, Tính toán).
+    /// </summary>
+    public Enums.ExerciseType ExerciseType { get; set; }
+
+    /// <summary>
     /// Số lượng câu hỏi ngẫu nhiên cần bốc thỏa mãn các tiêu chí trên.
     /// </summary>
     public int Quantity { get; set; }
