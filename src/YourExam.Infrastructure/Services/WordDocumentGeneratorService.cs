@@ -50,47 +50,134 @@ public class WordDocumentGeneratorService : IDocumentGeneratorService
             {
                 var exercise = exercises[i];
                 
+                // Determine prefix based on multiple choice or not, and ExerciseType
+                bool isMultipleChoice = exercise.Choices != null && exercise.Choices.Any();
+                string boldPrefix = $"Bài {i + 1}: ";
+                string normalPrefix = "";
+                string contentText = exercise.Content;
+
+                if (isMultipleChoice)
+                {
+                    switch (exercise.ExerciseType)
+                    {
+                        case 1: // Calculation
+                            normalPrefix = "Kết quả phép tính ";
+                            contentText = $"{exercise.Content} là";
+                            break;
+                        case 3: // Comparison
+                            contentText = $"{exercise.Content}, dấu phù hợp để điền vào chỗ trống là";
+                            break;
+                        case 4: // FillInTheBlank
+                            contentText = $"{exercise.Content}, số phù hợp để điền vào chỗ trống là";
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (exercise.ExerciseType)
+                    {
+                        case 1: // Calculation
+                            normalPrefix = "Tính kết quả của phép tính ";
+                            break;
+                        case 3: // Comparison
+                            normalPrefix = "Điền dấu phù hợp vào chỗ trống ";
+                            break;
+                        case 4: // FillInTheBlank
+                            normalPrefix = "Điền số phù hợp vào chỗ trống ";
+                            break;
+                    }
+                }
+
                 // Add Question Content
                 var questionParagraph = new Paragraph(
                     new Run(
                         new RunProperties(new Bold()),
-                        new Text($"Câu {i + 1}: ")
+                        new Text(boldPrefix) { Space = SpaceProcessingModeValues.Preserve }
                     ),
                     new Run(
-                        new Text(exercise.Content)
+                        new Text(normalPrefix + contentText) { Space = SpaceProcessingModeValues.Preserve }
                     )
                 );
                 body.AppendChild(questionParagraph);
 
+                if (!isMultipleChoice && exercise.ExerciseType == 2)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        body.AppendChild(new Paragraph(
+                            new ParagraphProperties(
+                                new Tabs(
+                                    new TabStop() { Val = TabStopValues.Right, Leader = TabStopLeaderCharValues.Dot, Position = 9026 }
+                                )
+                            ),
+                            new Run(new TabChar())
+                        ));
+                    }
+                }
+
                 // Add Choices if it's a multiple choice question
                 if (exercise.Choices != null && exercise.Choices.Any())
                 {
-                    char choiceLetter = 'A';
-                    foreach (var choice in exercise.Choices)
-                    {
-                        var isCorrectChoice = includeAnswers && exercise.CorrectAnswer == choice;
-                        
-                        var choiceRun = new Run(new Text($"{choiceLetter}. {choice}"));
-                        
-                        // Highlight correct answer if needed
-                        if (isCorrectChoice)
-                        {
-                            choiceRun.RunProperties = new RunProperties(
-                                new Color { Val = "FF0000" }, // Red color
-                                new Bold()
-                            );
-                        }
+                    int maxLength = exercise.Choices.Max(c => c?.Length ?? 0);
+                    int columns = maxLength < 15 ? 4 : (maxLength < 40 ? 2 : 1);
 
-                        var choiceParagraph = new Paragraph(choiceRun);
-                        
-                        // Add indentation for choices
-                        choiceParagraph.ParagraphProperties = new ParagraphProperties(
-                            new Indentation { Left = "720" } // 0.5 inch indent
-                        );
-                        
-                        body.AppendChild(choiceParagraph);
-                        choiceLetter++;
+                    Table table = new Table();
+                    TableProperties tblProp = new TableProperties(
+                        new TableWidth() { Type = TableWidthUnitValues.Pct, Width = "5000" },
+                        new TableBorders(
+                            new TopBorder() { Val = BorderValues.None },
+                            new BottomBorder() { Val = BorderValues.None },
+                            new LeftBorder() { Val = BorderValues.None },
+                            new RightBorder() { Val = BorderValues.None },
+                            new InsideHorizontalBorder() { Val = BorderValues.None },
+                            new InsideVerticalBorder() { Val = BorderValues.None }
+                        ),
+                        // Add some indentation to the table itself
+                        new TableIndentation() { Width = 720, Type = TableWidthUnitValues.Dxa }
+                    );
+                    table.AppendChild(tblProp);
+
+                    int rows = (int)Math.Ceiling(exercise.Choices.Count / (double)columns);
+                    char choiceLetter = 'A';
+
+                    for (int r = 0; r < rows; r++)
+                    {
+                        TableRow tr = new TableRow();
+                        for (int c = 0; c < columns; c++)
+                        {
+                            int index = r * columns + c;
+                            TableCell tc = new TableCell();
+
+                            tc.AppendChild(new TableCellProperties(
+                                new TableCellWidth { Type = TableWidthUnitValues.Pct, Width = (5000 / columns).ToString() }
+                            ));
+
+                            if (index < exercise.Choices.Count)
+                            {
+                                var choice = exercise.Choices[index];
+                                var isCorrectChoice = includeAnswers && exercise.CorrectAnswer == choice;
+                                var choiceRun = new Run(new Text($"{choiceLetter}. {choice}") { Space = SpaceProcessingModeValues.Preserve });
+
+                                if (isCorrectChoice)
+                                {
+                                    choiceRun.RunProperties = new RunProperties(
+                                        new Color { Val = "FF0000" },
+                                        new Bold()
+                                    );
+                                }
+
+                                tc.AppendChild(new Paragraph(choiceRun));
+                                choiceLetter++;
+                            }
+                            else
+                            {
+                                tc.AppendChild(new Paragraph(new Run(new Text(""))));
+                            }
+                            tr.AppendChild(tc);
+                        }
+                        table.AppendChild(tr);
                     }
+                    body.AppendChild(table);
                 }
                 else if (includeAnswers && !string.IsNullOrWhiteSpace(exercise.CorrectAnswer))
                 {
@@ -107,8 +194,7 @@ public class WordDocumentGeneratorService : IDocumentGeneratorService
                     body.AppendChild(answerParagraph);
                 }
 
-                // Add empty line between questions
-                body.AppendChild(new Paragraph(new Run(new Text(""))));
+                // Removed empty paragraph to reduce spacing between questions
             }
         }
         return memoryStream.ToArray();
