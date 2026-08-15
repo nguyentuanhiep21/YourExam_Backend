@@ -114,6 +114,8 @@ When generating new features, always generate code in this order:
 6. **EF Core Configuration & Repository Implementation** (in Infrastructure)
 7. **Controller / Minimal API Endpoint** (in Web.API)
 
+- **Before Feature Development**: You MUST read `gitnexus://repo/YourExam_Frontend/context`, `clusters`, and `processes` via GitNexus MCP to understand the current file organization, directory structure, and execution flows before writing code.
+
 <!-- end:backend-rules -->
 
 <!-- begin:Karpathy-Inspired Claude Code Guidelines -->

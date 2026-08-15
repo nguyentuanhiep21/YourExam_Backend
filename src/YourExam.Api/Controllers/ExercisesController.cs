@@ -21,4 +21,11 @@ public class ExercisesController : ControllerBase
         var result = await _mediator.Send(command);
         return Ok(result);
     }
+
+    [HttpPost("export/docx")]
+    public async Task<IActionResult> ExportToDocx([FromBody] YourExam.Application.Features.Exercises.Commands.ExportExercisesToDocx.ExportExercisesToDocxCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return File(result.ZipBytes, "application/zip", result.ZipFileName);
+    }
 }

@@ -435,7 +435,7 @@ AGENTS.md
 CLAUSE.md
 
 # Documentation
-docs
+.docs
 src/YourExam.Api/appsettings.Development.json
 src/YourExam.Api/appsettings.json
 

@@ -55,6 +55,7 @@ builder.Services.AddScoped<YourExam.Application.Common.Rules.IFallbackRuleProvid
 builder.Services.AddScoped<YourExam.Application.Interfaces.IMathEvaluatorService, YourExam.Application.Services.MathEvaluatorService>();
 builder.Services.AddScoped<YourExam.Application.Interfaces.IVariableGeneratorService, YourExam.Application.Services.VariableGeneratorService>();
 builder.Services.AddSingleton<YourExam.Application.Interfaces.ITextVariableGeneratorService, YourExam.Infrastructure.Services.TextVariableGeneratorService>();
+builder.Services.AddScoped<YourExam.Application.Interfaces.IDocumentGeneratorService, YourExam.Infrastructure.Services.WordDocumentGeneratorService>();
 builder.Services.AddHttpClient<YourExam.Application.Interfaces.IOpenRouterService, YourExam.Infrastructure.Services.OpenRouterService>();
 
 // Register Question Generation Strategy
