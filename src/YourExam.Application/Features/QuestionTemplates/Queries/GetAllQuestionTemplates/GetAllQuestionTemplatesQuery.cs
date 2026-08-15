@@ -1,5 +1,5 @@
 using MediatR;
-using YourExam.Application.DTOs;
+using YourExam.Application.DTOs.QuestionTemplates;
 
 namespace YourExam.Application.Features.QuestionTemplates.Queries.GetAllQuestionTemplates;
 
@@ -12,3 +12,4 @@ public class GetAllQuestionTemplatesQuery : IRequest<List<QuestionTemplateDto>>
     public Domain.Enums.ExerciseType? ExerciseType { get; set; }
     public int? Quantity { get; set; }
 }
+

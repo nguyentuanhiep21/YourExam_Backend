@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using YourExam.Application.DTOs;
+using YourExam.Application.DTOs.QuestionTemplates;
 using YourExam.Application.Features.QuestionTemplates.Queries.GetAllQuestionTemplates;
 using YourExam.Application.Features.QuestionTemplates.Queries.GetQuestionTemplateById;
 using YourExam.Application.Features.QuestionTemplates.Commands.AutoGenerateTemplates;
@@ -19,16 +19,8 @@ public class QuestionTemplatesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<QuestionTemplateDto>>> GetAll([FromQuery] string? subject, [FromQuery] int? difficulty, [FromQuery] int? gradeLevel, [FromQuery] Domain.Enums.ExerciseType? exerciseType, [FromQuery] int? quantity)
+    public async Task<ActionResult<List<QuestionTemplateDto>>> GetAll([FromQuery] GetAllQuestionTemplatesQuery query)
     {
-        var query = new GetAllQuestionTemplatesQuery 
-        { 
-            Subject = subject, 
-            Difficulty = difficulty,
-            GradeLevel = gradeLevel,
-            ExerciseType = exerciseType,
-            Quantity = quantity
-        };
         var templates = await _mediator.Send(query);
         return Ok(templates);
     }
@@ -47,3 +39,4 @@ public class QuestionTemplatesController : ControllerBase
         return Ok(new { Message = $"Đã tạo thành công {count} templates", Count = count });
     }
 }
+

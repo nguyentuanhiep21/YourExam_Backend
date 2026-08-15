@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using YourExam.Application.DTOs;
+using YourExam.Application.DTOs.QuestionTemplates;
 using YourExam.Application.Interfaces;
 
 namespace YourExam.Application.Features.QuestionTemplates.Queries.GetAllQuestionTemplates;
@@ -45,21 +45,21 @@ public class GetAllQuestionTemplatesQueryHandler : IRequestHandler<GetAllQuestio
 
         var templates = await query.ToListAsync(cancellationToken);
 
-        return templates.Select(q => new QuestionTemplateDto
-        {
-            Id = q.Id,
-            Subject = q.Subject,
-            GradeLevel = q.GradeLevel,
-            Topic = q.Topic,
-            Difficulty = q.Difficulty,
-            ExerciseType = q.ExerciseType,
-            ContentTemplate = q.ContentTemplate,
-            VariablesConfig = q.VariablesConfig,
-            AnswerFormula = q.AnswerFormula,
-            DistractorLogic = q.DistractorLogic,
-            EqualTargetVariable = q.EqualTargetVariable,
-            MasterTemplateId = q.MasterTemplateId,
-            IsActive = q.IsActive
-        }).ToList();
+        return templates.Select(q => new QuestionTemplateDto(
+            q.Id,
+            q.Subject,
+            q.GradeLevel,
+            q.Topic,
+            q.Difficulty,
+            q.ExerciseType,
+            q.ContentTemplate,
+            q.VariablesConfig,
+            q.AnswerFormula,
+            q.DistractorLogic,
+            q.EqualTargetVariable,
+            q.MasterTemplateId,
+            q.IsActive
+        )).ToList();
     }
 }
+

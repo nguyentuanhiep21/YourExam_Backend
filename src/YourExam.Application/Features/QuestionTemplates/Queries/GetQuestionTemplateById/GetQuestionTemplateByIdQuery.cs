@@ -1,5 +1,5 @@
 using MediatR;
-using YourExam.Application.DTOs;
+using YourExam.Application.DTOs.QuestionTemplates;
 
 namespace YourExam.Application.Features.QuestionTemplates.Queries.GetQuestionTemplateById;
 
@@ -12,3 +12,4 @@ public class GetQuestionTemplateByIdQuery : IRequest<QuestionTemplateDto?>
         Id = id;
     }
 }
+

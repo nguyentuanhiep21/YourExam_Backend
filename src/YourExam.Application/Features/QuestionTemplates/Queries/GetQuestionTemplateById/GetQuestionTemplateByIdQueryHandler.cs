@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using YourExam.Application.DTOs;
+using YourExam.Application.DTOs.QuestionTemplates;
 using YourExam.Application.Interfaces;
 
 namespace YourExam.Application.Features.QuestionTemplates.Queries.GetQuestionTemplateById;
@@ -22,21 +22,21 @@ public class GetQuestionTemplateByIdQueryHandler : IRequestHandler<GetQuestionTe
 
         if (template == null) return null;
 
-        return new QuestionTemplateDto
-        {
-            Id = template.Id,
-            Subject = template.Subject,
-            GradeLevel = template.GradeLevel,
-            Topic = template.Topic,
-            Difficulty = template.Difficulty,
-            ExerciseType = template.ExerciseType,
-            ContentTemplate = template.ContentTemplate,
-            VariablesConfig = template.VariablesConfig,
-            AnswerFormula = template.AnswerFormula,
-            DistractorLogic = template.DistractorLogic,
-            EqualTargetVariable = template.EqualTargetVariable,
-            MasterTemplateId = template.MasterTemplateId,
-            IsActive = template.IsActive
-        };
+        return new QuestionTemplateDto(
+            template.Id,
+            template.Subject,
+            template.GradeLevel,
+            template.Topic,
+            template.Difficulty,
+            template.ExerciseType,
+            template.ContentTemplate,
+            template.VariablesConfig,
+            template.AnswerFormula,
+            template.DistractorLogic,
+            template.EqualTargetVariable,
+            template.MasterTemplateId,
+            template.IsActive
+        );
     }
 }
+

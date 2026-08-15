@@ -48,7 +48,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 // Configure MediatR
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(YourExam.Application.DTOs.QuestionTemplateDto).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(YourExam.Application.DTOs.QuestionTemplates.QuestionTemplateDto).Assembly));
 
 // Register Services
 builder.Services.AddScoped<YourExam.Application.Common.Rules.IFallbackRuleProvider, YourExam.Application.Common.Rules.FallbackRuleProvider>();
