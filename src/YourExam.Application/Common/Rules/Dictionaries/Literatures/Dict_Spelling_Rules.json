@@ -11,7 +11,8 @@
             "t",
             "m"
         ],
-        "Template": "Điền chữ thích hợp vào chỗ trống: con [__][Tail]"
+        "Template": "Chọn chữ thích hợp để điền vào chỗ trống: con [__][Tail]",
+        "Template_TL": "Điền chữ thích hợp vào chỗ trống: con [__][Tail]"
     },
     {
         "Rule": "g/gh",
@@ -24,7 +25,8 @@
             "nh",
             "ch"
         ],
-        "Template": "Điền chữ thích hợp vào chỗ trống: cái [__][Tail] gỗ"
+        "Template": "Điền chữ thích hợp vào chỗ trống: cái [__][Tail] gỗ",
+        "Template_TL": "Điền chữ thích hợp vào chỗ trống: con [__][Tail]"
     },
     {
         "Rule": "ng/ngh",
@@ -37,6 +39,7 @@
             "nh",
             "m"
         ],
-        "Template": "Điền chữ thích hợp vào chỗ trống: chú [__][Tail] con"
+        "Template": "Điền chữ thích hợp vào chỗ trống: chú [__][Tail] con",
+        "Template_TL": "Điền chữ thích hợp vào chỗ trống: con [__][Tail]"
     }
 ]

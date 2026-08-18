@@ -1,5 +1,6 @@
 [
     {
+        "Question_Type": "Chọn từ",
         "Topic": "Con vật",
         "Sentence_Template": "Mèo con thích ăn [__].",
         "Correct_Words": [

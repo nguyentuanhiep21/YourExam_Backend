@@ -23,6 +23,19 @@ public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCo
     {
         var response = new GenerateExerciseResponse { Success = true };
 
+        if (SubjectSlug.Normalize(request.Subject) == "tiengviet" && request.Format == Domain.Enums.QuestionFormat.Essay)
+        {
+            if (request.ExerciseType == Domain.Enums.ExerciseType.OddOneOut || 
+                request.ExerciseType == Domain.Enums.ExerciseType.FillInBlank)
+            {
+                return new GenerateExerciseResponse 
+                { 
+                    Success = false, 
+                    ErrorMessage = $"Dạng bài tập này không hỗ trợ định dạng Tự luận. Vui lòng chọn định dạng Trắc nghiệm."
+                };
+            }
+        }
+
         // ── Luồng Động: Tiếng Việt bốc trực tiếp từ Dictionaries (không dùng DB) ──
         if (SubjectSlug.Normalize(request.Subject) == "tiengviet")
         {
@@ -42,7 +55,13 @@ public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCo
             {
                 try
                 {
-                    var exercise = await strategy.GenerateAsync(dummyTemplate);
+                    var exercise = await strategy.GenerateAsync(dummyTemplate, request.Format);
+                    
+                    if (request.Format == Domain.Enums.QuestionFormat.Essay)
+                    {
+                        exercise.Choices.Clear();
+                    }
+
                     response.Data.Add(exercise);
                 }
                 catch (Exception ex)
@@ -91,7 +110,13 @@ public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCo
             
             try
             {
-                var generatedExercise = await dbStrategy.GenerateAsync(template);
+                var generatedExercise = await dbStrategy.GenerateAsync(template, request.Format);
+                
+                if (request.Format == Domain.Enums.QuestionFormat.Essay)
+                {
+                    generatedExercise.Choices.Clear();
+                }
+
                 response.Data.Add(generatedExercise);
                 generatedCount++;
             }

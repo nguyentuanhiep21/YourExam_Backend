@@ -22,6 +22,7 @@ public class GenerateExerciseCommand : IRequest<GenerateExerciseResponse>
     public string Subject { get; set; } = string.Empty;
     public int Difficulty { get; set; }
     public Domain.Enums.ExerciseType ExerciseType { get; set; }
+    public Domain.Enums.QuestionFormat Format { get; set; } = Domain.Enums.QuestionFormat.MultipleChoice;
     public int GradeLevel { get; set; }
     public string? Topic { get; set; }
     public int Quantity { get; set; } = 1;
@@ -30,6 +31,7 @@ public class GenerateExerciseCommand : IRequest<GenerateExerciseResponse>
 public class GenerateExerciseResponse
 {
     public bool Success { get; set; }
+    public string? ErrorMessage { get; set; }
     public List<GeneratedExerciseDto> Data { get; set; } = new();
 }
 

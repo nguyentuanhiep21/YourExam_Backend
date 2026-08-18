@@ -29,7 +29,7 @@ public class MathGrade1CalculationStrategy : IQuestionGeneratorStrategy
             && exerciseType == Domain.Enums.ExerciseType.Calculation; // 1 = Calculation
     }
 
-    public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template)
+    public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template, Domain.Enums.QuestionFormat format)
     {
         var random = new Random();
         bool successForTemplate = false;

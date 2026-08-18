@@ -1,8 +1,9 @@
 [
     {
-        "Question_Type": "Nhận biết vần - Điền vần",
+        "Question_Type": "Nhận biết vần",
         "Target_Van": "an",
         "Template": "Tiếng nào dưới đây có chứa vần [Target]?",
+        "Template_TL": "Viết 3 tiếng có chứa vần [Target]?",
         "Correct_Words": [
             "bàn",
             "bạn",
@@ -51,6 +52,7 @@
     {
         "Target_Van": "inh",
         "Template": "Tiếng nào dưới đây có chứa vần [Target]?",
+        "Template_TL": "Viết 3 tiếng có chứa vần [Target]?",
         "Correct_Words": [
             "bình",
             "bính",
@@ -99,6 +101,7 @@
     {
         "Target_Van": "uông",
         "Template": "Tiếng nào dưới đây có chứa vần [Target]?",
+        "Template_TL": "Viết 3 tiếng có chứa vần [Target]?",
         "Correct_Words": [
             "buồng",
             "buông",

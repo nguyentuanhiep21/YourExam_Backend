@@ -32,7 +32,7 @@ public class MathGrade1WordProblemStrategy : IQuestionGeneratorStrategy
             && exerciseType == Domain.Enums.ExerciseType.WordProblem; // 2 = WordProblem
     }
 
-    public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template)
+    public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template, Domain.Enums.QuestionFormat format)
     {
         var random = new Random();
         bool successForTemplate = false;

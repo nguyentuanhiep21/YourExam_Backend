@@ -25,7 +25,7 @@ public class LiteratureGrade1Strategy : IQuestionGeneratorStrategy
         return SubjectSlug.Normalize(subject) == "tiengviet" && gradeLevel == 1;
     }
 
-    public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template)
+    public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template, Domain.Enums.QuestionFormat format)
     {
         var record = _dictService.GetRandomRecord(template.ExerciseType);
         if (record == null)
@@ -33,21 +33,28 @@ public class LiteratureGrade1Strategy : IQuestionGeneratorStrategy
 
         return Task.FromResult(template.ExerciseType switch
         {
-            Domain.Enums.ExerciseType.Phonetics     => GeneratePhonetics(record, template.Id),
-            Domain.Enums.ExerciseType.Spelling      => GenerateSpelling(record, template.Id),
-            Domain.Enums.ExerciseType.FillInTheBlank=> GenerateFillBlank(record, template.Id),
-            Domain.Enums.ExerciseType.WordOrder     => GenerateWordOrder(record, template.Id),
-            Domain.Enums.ExerciseType.OddOneOut     => GenerateOddOneOut(record, template.Id),
-            Domain.Enums.ExerciseType.Reading       => GenerateReading(record, template.Id),
+            Domain.Enums.ExerciseType.Phonetics                => GeneratePhonetics(record, template.Id, format),
+            Domain.Enums.ExerciseType.Spelling                 => GenerateSpelling(record, template.Id, format),
+            Domain.Enums.ExerciseType.FillInBlank              => GenerateFillBlank(record, template.Id),
+            Domain.Enums.ExerciseType.WordOrder                => GenerateWordOrder(record, template.Id, format),
+            Domain.Enums.ExerciseType.OddOneOut                => GenerateOddOneOut(record, template.Id),
+            Domain.Enums.ExerciseType.Reading                  => GenerateReading(record, template.Id),
             _ => throw new NotSupportedException($"Dạng bài {template.ExerciseType} chưa được hỗ trợ.")
         });
     }
 
-    // ─── Dạng 1 & 2: Nhận biết vần ─────────────────────────────────────────
-    private GeneratedExerciseDto GeneratePhonetics(JsonObject record, int templateId)
+    // ─── Dạng 5: Nhận biết vần (Phonetics) ─────────────────────────────────
+    private GeneratedExerciseDto GeneratePhonetics(JsonObject record, int templateId, Domain.Enums.QuestionFormat format)
     {
         var target    = record["Target_Van"]?.GetValue<string>() ?? "";
-        var template  = record["Template"]?.GetValue<string>()?.Replace("[Target]", target) ?? "";
+        string templateStr = null;
+        if (format == Domain.Enums.QuestionFormat.Essay)
+            templateStr = record["Template_TL"]?.GetValue<string>();
+        
+        if (string.IsNullOrEmpty(templateStr))
+            templateStr = record["Template"]?.GetValue<string>();
+            
+        var template = templateStr?.Replace("[Target]", target) ?? "";
         var corrects  = GetArray(record, "Correct_Words");
         var distractors = GetArray(record, "Distractor_Words");
 
@@ -65,11 +72,18 @@ public class LiteratureGrade1Strategy : IQuestionGeneratorStrategy
         };
     }
 
-    // ─── Dạng 3: Quy tắc Chính tả ──────────────────────────────────────────
-    private GeneratedExerciseDto GenerateSpelling(JsonObject record, int templateId)
+    // ─── Dạng 6: Quy tắc Chính tả (Spelling) ───────────────────────────────
+    private GeneratedExerciseDto GenerateSpelling(JsonObject record, int templateId, Domain.Enums.QuestionFormat format)
     {
         var tail     = record["Tail"]?.GetValue<string>() ?? "";
-        var template = record["Template"]?.GetValue<string>()?.Replace("[Tail]", tail) ?? "";
+        string templateStr = null;
+        if (format == Domain.Enums.QuestionFormat.Essay)
+            templateStr = record["Template_TL"]?.GetValue<string>();
+        
+        if (string.IsNullOrEmpty(templateStr))
+            templateStr = record["Template"]?.GetValue<string>();
+            
+        var template = templateStr?.Replace("[Tail]", tail) ?? "";
         var corrects  = GetArray(record, "Correct");
         var distractors = GetArray(record, "Distractors");
 
@@ -87,36 +101,16 @@ public class LiteratureGrade1Strategy : IQuestionGeneratorStrategy
         };
     }
 
-    // ─── Dạng 4 & 5: Điền từ ────────────────────────────────────────────────
-    private GeneratedExerciseDto GenerateFillBlank(JsonObject record, int templateId)
-    {
-        var content  = record["Sentence_Template"]?.GetValue<string>() ?? "";
-        var corrects  = GetArray(record, "Correct_Words");
-        var distractors = GetArray(record, "Distractors");
-
-        var correctAnswer = PickRandom(corrects, 1).First();
-        var choices = new List<string> { correctAnswer };
-        choices.AddRange(PickRandom(distractors, 3));
-        Shuffle(choices);
-
-        return new GeneratedExerciseDto
-        {
-            TemplateId = templateId,
-            Content = content,
-            CorrectAnswer = correctAnswer,
-            Choices = choices
-        };
-    }
-
-    // ─── Dạng 6: Sắp xếp từ thành câu ──────────────────────────────────────
-    private GeneratedExerciseDto GenerateWordOrder(JsonObject record, int templateId)
+    // ─── Dạng 7: Sắp xếp từ thành câu có nghĩa (WordOrder) ─────────────────
+    private GeneratedExerciseDto GenerateWordOrder(JsonObject record, int templateId, Domain.Enums.QuestionFormat format)
     {
         var correctSentence = record["Correct_Sentence"]?.GetValue<string>() ?? "";
         var shuffled = GetArray(record, "Shuffled_Words");
         var wrongOrders = GetArray(record, "Distractors_WrongOrder");
 
-        // Content trình bày các từ đã xáo trộn dưới dạng câu hỏi
-        var content = $"Sắp xếp các từ sau thành câu có nghĩa: {string.Join(" / ", shuffled)}";
+        var content = (format == Domain.Enums.QuestionFormat.Essay 
+            ? "Sắp xếp các từ sau thành câu có nghĩa: " 
+            : "Chọn câu có nghĩa được tạo nên bởi các từ sau: ") + string.Join(" / ", shuffled);
 
         var choices = new List<string> { correctSentence };
         choices.AddRange(PickRandom(wrongOrders, 3));
@@ -131,7 +125,7 @@ public class LiteratureGrade1Strategy : IQuestionGeneratorStrategy
         };
     }
 
-    // ─── Dạng 7: Odd One Out ────────────────────────────────────────────────
+    // ─── Dạng 8: Tìm từ khác loại (OddOneOut) ──────────────────────────────
     private GeneratedExerciseDto GenerateOddOneOut(JsonObject record, int templateId)
     {
         var category  = record["Category"]?.GetValue<string>() ?? "";
@@ -156,7 +150,7 @@ public class LiteratureGrade1Strategy : IQuestionGeneratorStrategy
         };
     }
 
-    // ─── Dạng 8: Đọc hiểu cực ngắn ─────────────────────────────────────────
+    // ─── Dạng 9: Đọc hiểu văn bản ngắn (Reading) ───────────────────────────
     private GeneratedExerciseDto GenerateReading(JsonObject record, int templateId)
     {
         var passage   = record["Passage"]?.GetValue<string>() ?? "";
@@ -180,6 +174,27 @@ public class LiteratureGrade1Strategy : IQuestionGeneratorStrategy
         };
     }
 
+    // ─── Dạng 10: Điền/Chọn từ (FillInBlank) ───────────────────────────────
+    private GeneratedExerciseDto GenerateFillBlank(JsonObject record, int templateId)
+    {
+        var content  = record["Sentence_Template"]?.GetValue<string>() ?? "";
+        var corrects  = GetArray(record, "Correct_Words");
+        var distractors = GetArray(record, "Distractors");
+
+        var correctAnswer = PickRandom(corrects, 1).First();
+        var choices = new List<string> { correctAnswer };
+        choices.AddRange(PickRandom(distractors, 3));
+        Shuffle(choices);
+
+        return new GeneratedExerciseDto
+        {
+            TemplateId = templateId,
+            Content = content,
+            CorrectAnswer = correctAnswer,
+            Choices = choices
+        };
+    }
+    
     // ─── Helpers ─────────────────────────────────────────────────────────────
     private static List<string> GetArray(JsonObject record, string key)
     {

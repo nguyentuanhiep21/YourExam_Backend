@@ -28,7 +28,7 @@ public class MathGrade1ComparisonStrategy : IQuestionGeneratorStrategy
             && exerciseType == Domain.Enums.ExerciseType.Comparison; // 3 = Comparison
     }
 
-    public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template)
+    public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template, Domain.Enums.QuestionFormat format)
     {
         var random = new Random();
         bool successForTemplate = false;

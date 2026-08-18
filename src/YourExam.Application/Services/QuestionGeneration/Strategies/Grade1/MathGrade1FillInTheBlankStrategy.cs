@@ -29,7 +29,7 @@ public class MathGrade1FillInTheBlankStrategy : IQuestionGeneratorStrategy
             && exerciseType == Domain.Enums.ExerciseType.FillInTheBlank;
     }
 
-    public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template)
+    public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template, Domain.Enums.QuestionFormat format)
     {
         var random = new Random();
         int renderAttempts = 0;

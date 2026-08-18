@@ -39,12 +39,12 @@ public class LiteratureDictionaryService : ILiteratureDictionaryService
 
         var fileMap = new Dictionary<ExerciseType, string>
         {
-            { ExerciseType.Phonetics,     Path.Combine(dictPath, "Dict_Phonetics.json") },
-            { ExerciseType.Spelling,      Path.Combine(dictPath, "Dict_Spelling_Rules.json") },
-            { ExerciseType.FillInTheBlank,Path.Combine(dictPath, "Dict_Fill_Blank.json") },
-            { ExerciseType.WordOrder,     Path.Combine(dictPath, "Dict_Word_Order.json") },
-            { ExerciseType.OddOneOut,     Path.Combine(dictPath, "Dict_Odd_One_Out.json") },
-            { ExerciseType.Reading,       Path.Combine(dictPath, "Dict_Reading_Mini.json") },
+            { ExerciseType.Phonetics,                Path.Combine(dictPath, "Dict_Phonetics.json") },
+            { ExerciseType.Spelling,                 Path.Combine(dictPath, "Dict_Spelling_Rules.json") },
+            { ExerciseType.FillInBlank,              Path.Combine(dictPath, "Dict_Fill_Blank.json") },
+            { ExerciseType.WordOrder,                Path.Combine(dictPath, "Dict_Word_Order.json") },
+            { ExerciseType.OddOneOut,                Path.Combine(dictPath, "Dict_Odd_One_Out.json") },
+            { ExerciseType.Reading,                  Path.Combine(dictPath, "Dict_Reading_Mini.json") },
         };
 
         foreach (var (type, filePath) in fileMap)
