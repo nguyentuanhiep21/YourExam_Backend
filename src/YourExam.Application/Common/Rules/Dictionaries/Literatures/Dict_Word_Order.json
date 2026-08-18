@@ -1,0 +1,54 @@
+[
+    {
+        "Question_Type": "Sắp xếp từ thành câu có nghĩa",
+        "Correct_Sentence": "Bé chăm chỉ học bài",
+        "Shuffled_Words": [
+            "học",
+            "chăm",
+            "bài",
+            "Bé",
+            "chỉ"
+        ],
+        "Distractors_WrongOrder": [
+            "Bài học chăm chỉ Bé",
+            "Chỉ chăm học bài Bé",
+            "Bé bài học chăm chỉ",
+            "Học chăm Bé bài chỉ",
+            "Bé học chỉ chăm bài"
+        ]
+    },
+    {
+        "Correct_Sentence": "Đàn gà con theo mẹ",
+        "Shuffled_Words": [
+            "con",
+            "mẹ",
+            "Đàn",
+            "theo",
+            "gà"
+        ],
+        "Distractors_WrongOrder": [
+            "Mẹ theo con gà Đàn",
+            "Gà Đàn theo mẹ con",
+            "Con gà mẹ theo Đàn",
+            "Đàn mẹ theo gà con",
+            "Theo gà con mẹ Đàn"
+        ]
+    },
+    {
+        "Correct_Sentence": "Hoa cúc nở rực rỡ",
+        "Shuffled_Words": [
+            "nở",
+            "rực",
+            "cúc",
+            "Hoa",
+            "rỡ"
+        ],
+        "Distractors_WrongOrder": [
+            "Rực rỡ hoa cúc nở",
+            "Cúc nở hoa rực rỡ",
+            "Hoa rực nở rỡ cúc",
+            "Nở hoa rực cúc rỡ",
+            "Rỡ rực hoa cúc nở"
+        ]
+    }
+]

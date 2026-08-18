@@ -1,0 +1,51 @@
+[
+    {
+        "Question_Type": "Đọc hiểu văn bản ngắn",
+        "Passage": "Nhà bé nuôi chú mèo tam thể. Mèo con thích sưởi nắng sớm. Nó rất chăm bắt chuột.",
+        "Question": "Mèo con thích làm gì vào buổi sớm?",
+        "Correct_Answers": [
+            "sưởi nắng",
+            "sưởi nắng sớm",
+            "nằm sưởi nắng"
+        ],
+        "Distractors": [
+            "bắt chuột",
+            "uống sữa",
+            "trèo cây",
+            "ngủ trưa",
+            "gặm cỏ"
+        ]
+    },
+    {
+        "Passage": "Mùa hè, ve kêu râm ran. Cây phượng nở hoa đỏ rực. Bé được nghỉ hè.",
+        "Question": "Hoa phượng có màu gì?",
+        "Correct_Answers": [
+            "đỏ rực",
+            "màu đỏ",
+            "màu đỏ rực"
+        ],
+        "Distractors": [
+            "vàng tươi",
+            "tím biếc",
+            "trắng tinh",
+            "xanh lam",
+            "hồng phớt"
+        ]
+    },
+    {
+        "Passage": "Bà trồng một giàn mướp hương. Hoa mướp màu vàng tươi. Quả mướp dài và thơm mát.",
+        "Question": "Bà trồng cây gì?",
+        "Correct_Answers": [
+            "mướp hương",
+            "cây mướp",
+            "giàn mướp hương"
+        ],
+        "Distractors": [
+            "hoa cúc",
+            "cây chanh",
+            "hoa sen",
+            "cây ổi",
+            "cây ngô"
+        ]
+    }
+]

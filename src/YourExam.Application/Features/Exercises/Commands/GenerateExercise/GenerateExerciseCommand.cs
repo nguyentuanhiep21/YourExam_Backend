@@ -2,6 +2,21 @@ using MediatR;
 
 namespace YourExam.Application.Features.Exercises.Commands.GenerateExercise;
 
+/// <summary>
+/// Chuẩn hóa tên môn học: chấp nhận cả có dấu lẫn không dấu (slug).
+/// "toan" | "Toán" → "toan"
+/// "tiengviet" | "Tiếng Việt" → "tiengviet"
+/// </summary>
+public static class SubjectSlug
+{
+    public static string Normalize(string subject) => subject.ToLowerInvariant() switch
+    {
+        "toán" or "toan" or "math" or "mathematics" => "toan",
+        "tiếng việt" or "tiengviet" or "literature" or "van" => "tiengviet",
+        var s => s
+    };
+}
+
 public class GenerateExerciseCommand : IRequest<GenerateExerciseResponse>
 {
     public string Subject { get; set; } = string.Empty;

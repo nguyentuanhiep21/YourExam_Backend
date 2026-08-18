@@ -1,0 +1,42 @@
+[
+    {
+        "Question_Type": "Quy tắc Chính tả",
+        "Rule": "c/k",
+        "Tail": "iến",
+        "Correct": [
+            "k"
+        ],
+        "Distractors": [
+            "c",
+            "t",
+            "m"
+        ],
+        "Template": "Điền chữ thích hợp vào chỗ trống: con [__][Tail]"
+    },
+    {
+        "Rule": "g/gh",
+        "Tail": "ế",
+        "Correct": [
+            "gh"
+        ],
+        "Distractors": [
+            "g",
+            "nh",
+            "ch"
+        ],
+        "Template": "Điền chữ thích hợp vào chỗ trống: cái [__][Tail] gỗ"
+    },
+    {
+        "Rule": "ng/ngh",
+        "Tail": "é",
+        "Correct": [
+            "ngh"
+        ],
+        "Distractors": [
+            "ng",
+            "nh",
+            "m"
+        ],
+        "Template": "Điền chữ thích hợp vào chỗ trống: chú [__][Tail] con"
+    }
+]

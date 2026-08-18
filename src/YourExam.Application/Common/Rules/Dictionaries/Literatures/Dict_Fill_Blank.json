@@ -1,0 +1,88 @@
+[
+    {
+        "Topic": "Con vật",
+        "Sentence_Template": "Mèo con thích ăn [__].",
+        "Correct_Words": [
+            "cá",
+            "tôm",
+            "chuột",
+            "thịt",
+            "hạt"
+        ],
+        "Distractors": [
+            "cỏ",
+            "lá",
+            "cà rốt",
+            "chuối",
+            "cam",
+            "ngô",
+            "khế",
+            "mía",
+            "cây",
+            "hoa",
+            "gỗ",
+            "đá",
+            "bóng",
+            "giấy",
+            "vở",
+            "bút"
+        ]
+    },
+    {
+        "Topic": "Đồ dùng học tập",
+        "Sentence_Template": "Bé dùng bút để [__].",
+        "Correct_Words": [
+            "viết",
+            "vẽ",
+            "tô",
+            "kẻ"
+        ],
+        "Distractors": [
+            "ăn",
+            "uống",
+            "ngủ",
+            "chạy",
+            "nhảy",
+            "múa",
+            "hát",
+            "bơi",
+            "nghe",
+            "nhìn",
+            "ngửi",
+            "rửa",
+            "tắm",
+            "quét",
+            "lau",
+            "nấu"
+        ]
+    },
+    {
+        "Topic": "Gia đình và Đời sống",
+        "Sentence_Template": "Bé uống một cốc [__].",
+        "Correct_Words": [
+            "nước",
+            "sữa",
+            "cam",
+            "chanh",
+            "trà"
+        ],
+        "Distractors": [
+            "cơm",
+            "bánh",
+            "canh",
+            "kẹo",
+            "cháo",
+            "chuối",
+            "táo",
+            "khoai",
+            "ngô",
+            "cá",
+            "thịt",
+            "rau",
+            "trứng",
+            "muối",
+            "đường",
+            "gạo"
+        ]
+    }
+]

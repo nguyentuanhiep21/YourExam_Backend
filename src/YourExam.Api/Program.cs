@@ -65,6 +65,10 @@ builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQue
 builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorStrategy, YourExam.Application.Services.QuestionGeneration.Strategies.Grade1.MathGrade1WordProblemStrategy>();
 builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorFactory, YourExam.Application.Services.QuestionGeneration.QuestionGeneratorFactory>();
 
+// Register Literature (Tiếng Việt) — Singleton vì dữ liệu tĩnh, load 1 lần lúc startup
+builder.Services.AddSingleton<YourExam.Application.Interfaces.ILiteratureDictionaryService, YourExam.Application.Services.QuestionGeneration.LiteratureDictionaryService>();
+builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorStrategy, YourExam.Application.Services.QuestionGeneration.Strategies.Grade1.LiteratureGrade1Strategy>();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
