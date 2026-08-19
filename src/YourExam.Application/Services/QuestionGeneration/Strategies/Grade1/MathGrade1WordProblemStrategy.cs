@@ -27,7 +27,7 @@ public class MathGrade1WordProblemStrategy : IQuestionGeneratorStrategy
 
     public bool CanHandle(string subject, int gradeLevel, Domain.Enums.ExerciseType exerciseType)
     {
-        return subject.Equals("Toán", StringComparison.OrdinalIgnoreCase) 
+        return subject.Equals("toan", StringComparison.OrdinalIgnoreCase) 
             && gradeLevel == 1 
             && exerciseType == Domain.Enums.ExerciseType.WordProblem; // 2 = WordProblem
     }

@@ -23,7 +23,7 @@ public class MathGrade1ComparisonStrategy : IQuestionGeneratorStrategy
 
     public bool CanHandle(string subject, int gradeLevel, Domain.Enums.ExerciseType exerciseType)
     {
-        return subject.Equals("Toán", StringComparison.OrdinalIgnoreCase) 
+        return subject.Equals("toan", StringComparison.OrdinalIgnoreCase) 
             && gradeLevel == 1 
             && exerciseType == Domain.Enums.ExerciseType.Comparison; // 3 = Comparison
     }

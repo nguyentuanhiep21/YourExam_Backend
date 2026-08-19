@@ -23,7 +23,7 @@ public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCo
     {
         var response = new GenerateExerciseResponse { Success = true };
 
-        if (SubjectSlug.Normalize(request.Subject) == "tiengviet" && request.Format == Domain.Enums.QuestionFormat.Essay)
+        if (request.Subject.ToLower() == "tiengviet" && request.Format == Domain.Enums.QuestionFormat.Essay)
         {
             if (request.ExerciseType == Domain.Enums.ExerciseType.OddOneOut || 
                 request.ExerciseType == Domain.Enums.ExerciseType.FillInBlank)
@@ -37,7 +37,7 @@ public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCo
         }
 
         // ── Luồng Động: Tiếng Việt bốc trực tiếp từ Dictionaries (không dùng DB) ──
-        if (SubjectSlug.Normalize(request.Subject) == "tiengviet")
+        if (request.Subject.ToLower() == "tiengviet")
         {
             var strategy = _questionGeneratorFactory.GetStrategy(request.Subject, request.GradeLevel, request.ExerciseType);
 
@@ -76,7 +76,7 @@ public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCo
         // ── Luồng Tĩnh: Toán và các môn còn lại → đọc từ DB ─────────────────
         var query = _dbContext.QuestionTemplates
             .Where(t => t.IsActive 
-                        && SubjectSlug.Normalize(t.Subject) == SubjectSlug.Normalize(request.Subject)
+                        && t.Subject.ToLower() == request.Subject.ToLower()
                         && t.GradeLevel == request.GradeLevel
                         && t.Difficulty == request.Difficulty
                         && t.ExerciseType == request.ExerciseType);

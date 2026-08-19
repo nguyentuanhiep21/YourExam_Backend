@@ -24,7 +24,7 @@ public class MathGrade1CalculationStrategy : IQuestionGeneratorStrategy
 
     public bool CanHandle(string subject, int gradeLevel, Domain.Enums.ExerciseType exerciseType)
     {
-        return subject.Equals("Toán", StringComparison.OrdinalIgnoreCase) 
+        return subject.Equals("toan", StringComparison.OrdinalIgnoreCase) 
             && gradeLevel == 1 
             && exerciseType == Domain.Enums.ExerciseType.Calculation; // 1 = Calculation
     }

@@ -22,7 +22,7 @@ public class LiteratureGrade1Strategy : IQuestionGeneratorStrategy
 
     public bool CanHandle(string subject, int gradeLevel, Domain.Enums.ExerciseType exerciseType)
     {
-        return SubjectSlug.Normalize(subject) == "tiengviet" && gradeLevel == 1;
+        return subject.Equals("tiengviet", StringComparison.OrdinalIgnoreCase) && gradeLevel == 1;
     }
 
     public Task<GeneratedExerciseDto> GenerateAsync(QuestionTemplate template, Domain.Enums.QuestionFormat format)
