@@ -1,7 +1,7 @@
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **YourExam_Backend** (778 symbols, 1406 relationships, 21 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **YourExam_Backend** (782 symbols, 1422 relationships, 24 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
 
@@ -113,6 +113,8 @@ When generating new features, always generate code in this order:
 5. **CommandHandler / QueryHandler** (in Application)
 6. **EF Core Configuration & Repository Implementation** (in Infrastructure)
 7. **Controller / Minimal API Endpoint** (in Web.API)
+
+- **Before Feature Development**: You MUST read `gitnexus://repo/YourExam_Frontend/context`, `clusters`, and `processes` via GitNexus MCP to understand the current file organization, directory structure, and execution flows before writing code.
 
 <!-- end:backend-rules -->
 

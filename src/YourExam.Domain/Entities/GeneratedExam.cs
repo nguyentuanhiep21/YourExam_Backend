@@ -27,8 +27,28 @@ public class GeneratedExam
     /// <summary>
     /// Khối lớp áp dụng (Ví dụ: 1, 2, 3, 4, 5).
     /// </summary>
-    public int GradeLevel { get; set; } 
-    
+    public int GradeLevel { get; set; }
+
+    /// <summary>
+    /// Môn học (Ví dụ: "Toán học", "Ngữ văn", "Tiếng Anh").
+    /// </summary>
+    public string Subject { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Thời gian làm bài tính bằng phút (Ví dụ: 45, 90).
+    /// </summary>
+    public int DurationMinutes { get; set; }
+
+    /// <summary>
+    /// Tổng điểm của đề thi (Ví dụ: 10, 20, 100).
+    /// </summary>
+    public decimal TotalScore { get; set; }
+
+    /// <summary>
+    /// Mức độ khó tổng thể của đề thi (1: Dễ, 2: Trung bình, 3: Khó).
+    /// </summary>
+    public int Difficulty { get; set; }
+
     /// <summary>
     /// Đường dẫn tải file Microsoft Word (.docx) lưu trên Supabase Storage.
     /// </summary>
@@ -64,6 +84,12 @@ public class GeneratedExam
     /// </summary>
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+    /// <summary>
+    /// Thời gian cập nhật gần nhất.
+    /// </summary>
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
     // --- Navigation properties (phục vụ Entity Framework) ---
+    public ICollection<GeneratedExamQuestion> Questions { get; set; } = new List<GeneratedExamQuestion>();
     public ICollection<Vote> Votes { get; set; } = new List<Vote>();
 }

@@ -15,6 +15,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<ExamBlueprint> ExamBlueprints { get; set; } = null!;
     public DbSet<BlueprintRule> BlueprintRules { get; set; } = null!;
     public DbSet<GeneratedExam> GeneratedExams { get; set; } = null!;
+    public DbSet<GeneratedExamQuestion> GeneratedExamQuestions { get; set; } = null!;
     public DbSet<Vote> Votes { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -72,7 +73,10 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         {
             entity.ToTable("GeneratedExams");
             entity.HasKey(e => e.Id);
-            
+
+            entity.Property(e => e.Subject).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.TotalScore).HasPrecision(5, 2);
+
             // Khai báo Khóa Ngoại trỏ về Tác giả (Profile)
             entity.HasOne(e => e.Author)
                   .WithMany(u => u.GeneratedExams)
@@ -83,23 +87,50 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
             entity.HasOne(e => e.Blueprint)
                   .WithMany(b => b.GeneratedExams)
                   .HasForeignKey(e => e.BlueprintId)
-                  .OnDelete(DeleteBehavior.Restrict); 
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            // Navigation property to Questions
+            entity.HasMany(e => e.Questions)
+                  .WithOne(q => q.GeneratedExam)
+                  .HasForeignKey(q => q.GeneratedExamId)
+                  .OnDelete(DeleteBehavior.Cascade);
         });
 
-        // 6. Cấu hình bảng Vote (Khóa chính kép - Composite Key)
+        // 6. Cấu hình bảng GeneratedExamQuestion
+        modelBuilder.Entity<GeneratedExamQuestion>(entity =>
+        {
+            entity.ToTable("GeneratedExamQuestions");
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.QuestionContent).IsRequired();
+            entity.Property(e => e.MultipleChoiceOptions).HasColumnType("jsonb");
+            entity.Property(e => e.CorrectAnswer).HasMaxLength(10);
+            entity.Property(e => e.Score).HasPrecision(5, 2);
+
+            // Foreign Key to QuestionTemplate (nullable - câu hỏi có thể gen từ template hoặc tạo thủ công)
+            entity.HasOne(e => e.QuestionTemplate)
+                  .WithMany()
+                  .HasForeignKey(e => e.QuestionTemplateId)
+                  .OnDelete(DeleteBehavior.SetNull);
+
+            // Index for ordering questions
+            entity.HasIndex(e => new { e.GeneratedExamId, e.OrderIndex });
+        });
+
+        // 7. Cấu hình bảng Vote (Khóa chính kép - Composite Key)
         modelBuilder.Entity<Vote>(entity =>
         {
             entity.ToTable("Votes");
-            
+
             // Khai báo KHÓA CHÍNH KÉP (Gồm cả ExamId và UserId)
             entity.HasKey(e => new { e.ExamId, e.UserId });
-            
+
             // Khai báo Khóa Ngoại trỏ về Exam
             entity.HasOne(e => e.Exam)
                   .WithMany(ex => ex.Votes)
                   .HasForeignKey(e => e.ExamId)
                   .OnDelete(DeleteBehavior.Cascade);
-                  
+
             // Khai báo Khóa Ngoại trỏ về Profile
             entity.HasOne(e => e.User)
                   .WithMany(u => u.Votes)

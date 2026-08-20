@@ -100,9 +100,12 @@ public class WordDocumentGeneratorService : IDocumentGeneratorService
                 );
                 body.AppendChild(questionParagraph);
 
-                if (!isMultipleChoice && exercise.ExerciseType == 2)
+                if (!isMultipleChoice)
                 {
-                    for (int j = 0; j < 3; j++)
+                    // Bài toán có lời văn (Type = 2) hoặc Đọc hiểu (Type = 9) thường cần nhiều dòng hơn
+                    int lineCount = (exercise.ExerciseType == 2 || exercise.ExerciseType == 9) ? 3 : 1;
+
+                    for (int j = 0; j < lineCount; j++)
                     {
                         body.AppendChild(new Paragraph(
                             new ParagraphProperties(
