@@ -1,6 +1,6 @@
 [
     {
-        "Question_Type": "Đọc hiểu văn bản ngắn",
+        "Question_Type": "Đọc hiểu văn bản ngắn và trả lời câu hỏi",
         "Passage": "Nhà bé nuôi chú mèo tam thể. Mèo con thích sưởi nắng sớm. Nó rất chăm bắt chuột.",
         "Question": "Mèo con thích làm gì vào buổi sớm?",
         "Correct_Answers": [

@@ -3,7 +3,7 @@ using System.Text.Json;
 using YourExam.Domain.Enums;
 using YourExam.Application.Interfaces;
 
-namespace YourExam.Application.Services.QuestionGeneration;
+namespace YourExam.Infrastructure.Services;
 
 /// <summary>
 /// Load toàn bộ Dictionaries JSON vào RAM một lần lúc startup (Singleton).
@@ -31,7 +31,7 @@ public class LiteratureDictionaryService : ILiteratureDictionaryService
 
     private void LoadAll()
     {
-        // Tìm thư mục Dictionaries/Literatures tương đối từ assembly
+        // Tìm thư mục Resources/Literature tương đối từ assembly
         var baseDir = AppContext.BaseDirectory;
         var dictPath = FindDictionaryPath(baseDir);
 
@@ -66,14 +66,14 @@ public class LiteratureDictionaryService : ILiteratureDictionaryService
     }
 
     /// <summary>
-    /// Tìm đường dẫn thư mục Dictionaries/Literatures bằng cách leo lên thư mục cha.
+    /// Tìm đường dẫn thư mục Resources/Literature bằng cách leo lên thư mục cha.
     /// Phù hợp cả khi chạy local (dotnet run) lẫn deploy (publish).
     /// </summary>
     private static string? FindDictionaryPath(string startDir)
     {
         // Thứ tự tìm:
-        // 1. Publish path: bin/Release/net8.0/Common/Rules/Dictionaries/Literatures
-        var direct = Path.Combine(startDir, "Common", "Rules", "Dictionaries", "Literatures");
+        // 1. Publish path: bin/Release/net8.0/Resources/Literature
+        var direct = Path.Combine(startDir, "Resources", "Literature");
         if (Directory.Exists(direct)) return direct;
 
         // 2. Source path: leo lên từ bin/ để tìm src/
@@ -81,8 +81,7 @@ public class LiteratureDictionaryService : ILiteratureDictionaryService
         for (int i = 0; i < 8; i++)
         {
             if (dir == null) break;
-            var candidate = Path.Combine(dir.FullName, "src", "YourExam.Application",
-                "Common", "Rules", "Dictionaries", "Literatures");
+            var candidate = Path.Combine(dir.FullName, "src", "YourExam.Infrastructure", "Resources", "Literature");
             if (Directory.Exists(candidate)) return candidate;
             dir = dir.Parent;
         }

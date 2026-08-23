@@ -11,7 +11,7 @@ public class TextVariableGeneratorService : ITextVariableGeneratorService
     public TextVariableGeneratorService()
     {
         // Load global dictionary from file
-        string dictionaryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Common", "Rules", "Dictionaries", "Entities.json");
+        string dictionaryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Math", "Entities.json");
         if (File.Exists(dictionaryPath))
         {
             string jsonContent = File.ReadAllText(dictionaryPath);

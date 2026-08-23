@@ -1,6 +1,6 @@
 [
     {
-        "Question_Type": "Nhận biết vần",
+        "Question_Type": "Tìm từ có chứa vần chỉ định",
         "Target_Van": "an",
         "Template": "Tiếng nào dưới đây có chứa vần [Target]?",
         "Template_TL": "Viết 3 tiếng có chứa vần [Target]?",

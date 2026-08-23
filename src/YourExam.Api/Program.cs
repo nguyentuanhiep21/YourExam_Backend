@@ -56,7 +56,6 @@ builder.Services.AddScoped<YourExam.Application.Interfaces.IMathEvaluatorService
 builder.Services.AddScoped<YourExam.Application.Interfaces.IVariableGeneratorService, YourExam.Application.Services.VariableGeneratorService>();
 builder.Services.AddSingleton<YourExam.Application.Interfaces.ITextVariableGeneratorService, YourExam.Infrastructure.Services.TextVariableGeneratorService>();
 builder.Services.AddScoped<YourExam.Application.Interfaces.IDocumentGeneratorService, YourExam.Infrastructure.Services.WordDocumentGeneratorService>();
-builder.Services.AddHttpClient<YourExam.Application.Interfaces.IOpenRouterService, YourExam.Infrastructure.Services.OpenRouterService>();
 
 // Register Question Generation Strategy
 builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorStrategy, YourExam.Application.Services.QuestionGeneration.Strategies.Grade1.MathGrade1CalculationStrategy>();
@@ -66,7 +65,7 @@ builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQue
 builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorFactory, YourExam.Application.Services.QuestionGeneration.QuestionGeneratorFactory>();
 
 // Register Literature (Tiếng Việt) — Singleton vì dữ liệu tĩnh, load 1 lần lúc startup
-builder.Services.AddSingleton<YourExam.Application.Interfaces.ILiteratureDictionaryService, YourExam.Application.Services.QuestionGeneration.LiteratureDictionaryService>();
+builder.Services.AddSingleton<YourExam.Application.Interfaces.ILiteratureDictionaryService, YourExam.Infrastructure.Services.LiteratureDictionaryService>();
 builder.Services.AddScoped<YourExam.Application.Services.QuestionGeneration.IQuestionGeneratorStrategy, YourExam.Application.Services.QuestionGeneration.Strategies.Grade1.LiteratureGrade1Strategy>();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -76,7 +75,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+builder.Services.AddScoped<YourExam.Domain.Interfaces.IUnitOfWork, YourExam.Infrastructure.Data.UnitOfWork>();
+builder.Services.AddScoped<YourExam.Domain.Interfaces.IQuestionTemplateRepository, YourExam.Infrastructure.Repositories.QuestionTemplateRepository>();
 
 var app = builder.Build();
 

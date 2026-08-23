@@ -1,6 +1,6 @@
 [
     {
-        "Question_Type": "Chọn từ",
+        "Question_Type": "Chọn từ phù hợp để điền vào chỗ trống",
         "Topic": "Con vật",
         "Sentence_Template": "Mèo con thích ăn [__].",
         "Correct_Words": [

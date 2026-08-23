@@ -1,49 +1,30 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using YourExam.Application.DTOs.QuestionTemplates;
-using YourExam.Application.Interfaces;
+using YourExam.Domain.Interfaces;
 
 namespace YourExam.Application.Features.QuestionTemplates.Queries.GetAllQuestionTemplates;
 
 public class GetAllQuestionTemplatesQueryHandler : IRequestHandler<GetAllQuestionTemplatesQuery, List<QuestionTemplateDto>>
 {
-    private readonly IApplicationDbContext _context;
+    private readonly IQuestionTemplateRepository _repository;
 
-    public GetAllQuestionTemplatesQueryHandler(IApplicationDbContext context)
+    public GetAllQuestionTemplatesQueryHandler(IQuestionTemplateRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public async Task<List<QuestionTemplateDto>> Handle(GetAllQuestionTemplatesQuery request, CancellationToken cancellationToken)
     {
-        var query = _context.QuestionTemplates.AsNoTracking().Where(q => q.IsActive);
-
-        if (!string.IsNullOrEmpty(request.Subject))
-        {
-            query = query.Where(q => q.Subject == request.Subject);
-        }
-
-        if (request.Difficulty.HasValue)
-        {
-            query = query.Where(q => q.Difficulty == request.Difficulty.Value);
-        }
-
-        if (request.GradeLevel.HasValue)
-        {
-            query = query.Where(q => q.GradeLevel == request.GradeLevel.Value);
-        }
-
-        if (request.ExerciseType.HasValue)
-        {
-            query = query.Where(q => q.ExerciseType == request.ExerciseType.Value);
-        }
-
-        if (request.Quantity.HasValue && request.Quantity.Value > 0)
-        {
-            query = query.Take(request.Quantity.Value);
-        }
-
-        var templates = await query.ToListAsync(cancellationToken);
+        var templates = await _repository.GetActiveByCriteriaAsync(
+            subject: request.Subject,
+            difficulty: request.Difficulty,
+            gradeLevel: request.GradeLevel,
+            exerciseType: request.ExerciseType,
+            topic: null, // Topic is not in GetAllQuestionTemplatesQuery currently
+            offset: request.Offset,
+            limit: request.Quantity,
+            cancellationToken: cancellationToken
+        );
 
         return templates.Select(q => new QuestionTemplateDto(
             q.Id,

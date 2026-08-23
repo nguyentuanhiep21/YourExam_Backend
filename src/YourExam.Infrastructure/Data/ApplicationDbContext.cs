@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using YourExam.Application.Interfaces;
 using YourExam.Domain.Entities;
 
 namespace YourExam.Infrastructure.Data;
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {

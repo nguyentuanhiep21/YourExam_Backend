@@ -1,24 +1,21 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using YourExam.Application.DTOs.QuestionTemplates;
-using YourExam.Application.Interfaces;
+using YourExam.Domain.Interfaces;
 
 namespace YourExam.Application.Features.QuestionTemplates.Queries.GetQuestionTemplateById;
 
 public class GetQuestionTemplateByIdQueryHandler : IRequestHandler<GetQuestionTemplateByIdQuery, QuestionTemplateDto?>
 {
-    private readonly IApplicationDbContext _context;
+    private readonly IQuestionTemplateRepository _repository;
 
-    public GetQuestionTemplateByIdQueryHandler(IApplicationDbContext context)
+    public GetQuestionTemplateByIdQueryHandler(IQuestionTemplateRepository repository)
     {
-        _context = context;
+        _repository = repository;
     }
 
     public async Task<QuestionTemplateDto?> Handle(GetQuestionTemplateByIdQuery request, CancellationToken cancellationToken)
     {
-        var template = await _context.QuestionTemplates
-            .AsNoTracking()
-            .FirstOrDefaultAsync(q => q.Id == request.Id, cancellationToken);
+        var template = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
         if (template == null) return null;
 

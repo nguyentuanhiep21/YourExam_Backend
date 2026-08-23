@@ -1,21 +1,21 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using YourExam.Application.Interfaces;
 using YourExam.Application.Services.QuestionGeneration;
 using YourExam.Domain.Entities;
+using YourExam.Domain.Interfaces;
 
 namespace YourExam.Application.Features.Exercises.Commands.GenerateExercise;
 
 public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCommand, GenerateExerciseResponse>
 {
-    private readonly IApplicationDbContext _dbContext;
+    private readonly IQuestionTemplateRepository _repository;
     private readonly IQuestionGeneratorFactory _questionGeneratorFactory;
 
     public GenerateExerciseCommandHandler(
-        IApplicationDbContext dbContext,
+        IQuestionTemplateRepository repository,
         IQuestionGeneratorFactory questionGeneratorFactory)
     {
-        _dbContext = dbContext;
+        _repository = repository;
         _questionGeneratorFactory = questionGeneratorFactory;
     }
 
@@ -74,19 +74,16 @@ public class GenerateExerciseCommandHandler : IRequestHandler<GenerateExerciseCo
         }
 
         // ── Luồng Tĩnh: Toán và các môn còn lại → đọc từ DB ─────────────────
-        var query = _dbContext.QuestionTemplates
-            .Where(t => t.IsActive 
-                        && t.Subject.ToLower() == request.Subject.ToLower()
-                        && t.GradeLevel == request.GradeLevel
-                        && t.Difficulty == request.Difficulty
-                        && t.ExerciseType == request.ExerciseType);
-
-        if (!string.IsNullOrEmpty(request.Topic))
-        {
-            query = query.Where(t => t.Topic.ToLower() == request.Topic.ToLower());
-        }
-
-        var matchingTemplates = await query.ToListAsync(cancellationToken);
+        var matchingTemplates = await _repository.GetActiveByCriteriaAsync(
+            subject: request.Subject,
+            difficulty: request.Difficulty,
+            gradeLevel: request.GradeLevel,
+            exerciseType: request.ExerciseType,
+            topic: request.Topic,
+            offset: 0,
+            limit: null, // Since we shuffle in-memory, we fetch all matching
+            cancellationToken: cancellationToken
+        );
 
         if (!matchingTemplates.Any())
         {

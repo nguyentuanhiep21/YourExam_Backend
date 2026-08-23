@@ -10,6 +10,7 @@ public class GetAllQuestionTemplatesQuery : IRequest<List<QuestionTemplateDto>>
     public int? Difficulty { get; set; }
     public int? GradeLevel { get; set; }
     public Domain.Enums.ExerciseType? ExerciseType { get; set; }
-    public int? Quantity { get; set; }
+    public int? Quantity { get; set; } // acts as Limit
+    public int? Offset { get; set; }
 }
 
