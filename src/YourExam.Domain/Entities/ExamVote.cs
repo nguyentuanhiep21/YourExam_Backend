@@ -1,6 +1,6 @@
 namespace YourExam.Domain.Entities;
 
-public class Vote
+public class ExamVote
 {
     /// <summary>
     /// Khóa ngoại trỏ về Đề thi được vote. Đóng vai trò là 1 phần của Composite Primary Key.

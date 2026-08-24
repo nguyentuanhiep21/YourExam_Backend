@@ -60,7 +60,7 @@ public class GeneratedExam
     public string? PdfFileUrl { get; set; }
     
     /// <summary>
-    /// Tổng số lượt Upvote (Thích) cập nhật trực tiếp thay vì đếm động từ bảng Vote để tối ưu hiệu năng.
+    /// Tổng số lượt Upvote (Thích) cập nhật trực tiếp thay vì đếm động từ bảng ExamVote để tối ưu hiệu năng.
     /// </summary>
     public int UpvoteCount { get; set; } = 0;
 
@@ -91,5 +91,6 @@ public class GeneratedExam
 
     // --- Navigation properties (phục vụ Entity Framework) ---
     public ICollection<GeneratedExamQuestion> Questions { get; set; } = new List<GeneratedExamQuestion>();
-    public ICollection<Vote> Votes { get; set; } = new List<Vote>();
+    public ICollection<ExamVote> ExamVotes { get; set; } = new List<ExamVote>();
+    public ICollection<ExamDownload> Downloads { get; set; } = new List<ExamDownload>();
 }

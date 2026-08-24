@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using YourExam.Infrastructure.Data;
@@ -11,9 +12,11 @@ using YourExam.Infrastructure.Data;
 namespace YourExam.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260824175206_AddExamDownloadEntity")]
+    partial class AddExamDownloadEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,27 +100,6 @@ namespace YourExam.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ExamDownloads", (string)null);
-                });
-
-            modelBuilder.Entity("YourExam.Domain.Entities.ExamVote", b =>
-                {
-                    b.Property<int>("ExamId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsUpvote")
-                        .HasColumnType("boolean");
-
-                    b.HasKey("ExamId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ExamVotes", (string)null);
                 });
 
             modelBuilder.Entity("YourExam.Domain.Entities.GeneratedExam", b =>
@@ -336,6 +318,27 @@ namespace YourExam.Infrastructure.Migrations
                     b.ToTable("QuestionTemplates", (string)null);
                 });
 
+            modelBuilder.Entity("YourExam.Domain.Entities.Vote", b =>
+                {
+                    b.Property<int>("ExamId")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsUpvote")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("ExamId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Votes", (string)null);
+                });
+
             modelBuilder.Entity("YourExam.Domain.Entities.BlueprintRule", b =>
                 {
                     b.HasOne("YourExam.Domain.Entities.ExamBlueprint", "Blueprint")
@@ -368,25 +371,6 @@ namespace YourExam.Infrastructure.Migrations
 
                     b.HasOne("YourExam.Domain.Entities.Profile", "User")
                         .WithMany("ExamDownloads")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Exam");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("YourExam.Domain.Entities.ExamVote", b =>
-                {
-                    b.HasOne("YourExam.Domain.Entities.GeneratedExam", "Exam")
-                        .WithMany("ExamVotes")
-                        .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("YourExam.Domain.Entities.Profile", "User")
-                        .WithMany("ExamVotes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -433,6 +417,25 @@ namespace YourExam.Infrastructure.Migrations
                     b.Navigation("QuestionTemplate");
                 });
 
+            modelBuilder.Entity("YourExam.Domain.Entities.Vote", b =>
+                {
+                    b.HasOne("YourExam.Domain.Entities.GeneratedExam", "Exam")
+                        .WithMany("Votes")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("YourExam.Domain.Entities.Profile", "User")
+                        .WithMany("Votes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("YourExam.Domain.Entities.ExamBlueprint", b =>
                 {
                     b.Navigation("GeneratedExams");
@@ -444,18 +447,18 @@ namespace YourExam.Infrastructure.Migrations
                 {
                     b.Navigation("Downloads");
 
-                    b.Navigation("ExamVotes");
-
                     b.Navigation("Questions");
+
+                    b.Navigation("Votes");
                 });
 
             modelBuilder.Entity("YourExam.Domain.Entities.Profile", b =>
                 {
                     b.Navigation("ExamDownloads");
 
-                    b.Navigation("ExamVotes");
-
                     b.Navigation("GeneratedExams");
+
+                    b.Navigation("Votes");
                 });
 #pragma warning restore 612, 618
         }

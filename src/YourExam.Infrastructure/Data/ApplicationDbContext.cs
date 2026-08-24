@@ -15,7 +15,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<BlueprintRule> BlueprintRules { get; set; } = null!;
     public DbSet<GeneratedExam> GeneratedExams { get; set; } = null!;
     public DbSet<GeneratedExamQuestion> GeneratedExamQuestions { get; set; } = null!;
-    public DbSet<Vote> Votes { get; set; } = null!;
+    public DbSet<ExamVote> ExamVotes { get; set; } = null!;
+    public DbSet<ExamDownload> ExamDownloads { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -116,23 +117,44 @@ public class ApplicationDbContext : DbContext
             entity.HasIndex(e => new { e.GeneratedExamId, e.OrderIndex });
         });
 
-        // 7. Cấu hình bảng Vote (Khóa chính kép - Composite Key)
-        modelBuilder.Entity<Vote>(entity =>
+        // 7. Cấu hình bảng ExamVote (Khóa chính kép - Composite Key)
+        modelBuilder.Entity<ExamVote>(entity =>
         {
-            entity.ToTable("Votes");
+            entity.ToTable("ExamVotes");
 
             // Khai báo KHÓA CHÍNH KÉP (Gồm cả ExamId và UserId)
             entity.HasKey(e => new { e.ExamId, e.UserId });
 
             // Khai báo Khóa Ngoại trỏ về Exam
             entity.HasOne(e => e.Exam)
-                  .WithMany(ex => ex.Votes)
+                  .WithMany(ex => ex.ExamVotes)
                   .HasForeignKey(e => e.ExamId)
                   .OnDelete(DeleteBehavior.Cascade);
 
             // Khai báo Khóa Ngoại trỏ về Profile
             entity.HasOne(e => e.User)
-                  .WithMany(u => u.Votes)
+                  .WithMany(u => u.ExamVotes)
+                  .HasForeignKey(e => e.UserId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // 8. Cấu hình bảng ExamDownload (Khóa chính kép - Composite Key)
+        modelBuilder.Entity<ExamDownload>(entity =>
+        {
+            entity.ToTable("ExamDownloads");
+
+            // Khai báo KHÓA CHÍNH KÉP (Gồm cả ExamId và UserId)
+            entity.HasKey(e => new { e.ExamId, e.UserId });
+
+            // Khai báo Khóa Ngoại trỏ về Exam
+            entity.HasOne(e => e.Exam)
+                  .WithMany(ex => ex.Downloads)
+                  .HasForeignKey(e => e.ExamId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            // Khai báo Khóa Ngoại trỏ về Profile
+            entity.HasOne(e => e.User)
+                  .WithMany(u => u.ExamDownloads)
                   .HasForeignKey(e => e.UserId)
                   .OnDelete(DeleteBehavior.Cascade);
         });
