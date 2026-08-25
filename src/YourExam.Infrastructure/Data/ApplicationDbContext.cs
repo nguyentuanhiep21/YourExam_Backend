@@ -17,6 +17,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<GeneratedExamQuestion> GeneratedExamQuestions { get; set; } = null!;
     public DbSet<ExamVote> ExamVotes { get; set; } = null!;
     public DbSet<ExamDownload> ExamDownloads { get; set; } = null!;
+    public DbSet<Topic> Topics { get; set; } = null!;
+    public DbSet<TopicComment> TopicComments { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -156,6 +158,38 @@ public class ApplicationDbContext : DbContext
             entity.HasOne(e => e.User)
                   .WithMany(u => u.ExamDownloads)
                   .HasForeignKey(e => e.UserId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // 9. Cấu hình bảng Topic
+        modelBuilder.Entity<Topic>(entity =>
+        {
+            entity.ToTable("Topics");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Title).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.Content).IsRequired();
+
+            entity.HasOne(e => e.Author)
+                  .WithMany(u => u.Topics)
+                  .HasForeignKey(e => e.AuthorId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // 10. Cấu hình bảng TopicComment
+        modelBuilder.Entity<TopicComment>(entity =>
+        {
+            entity.ToTable("TopicComments");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Content).IsRequired();
+
+            entity.HasOne(e => e.Topic)
+                  .WithMany(t => t.Comments)
+                  .HasForeignKey(e => e.TopicId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(e => e.Author)
+                  .WithMany(u => u.TopicComments)
+                  .HasForeignKey(e => e.AuthorId)
                   .OnDelete(DeleteBehavior.Cascade);
         });
     }

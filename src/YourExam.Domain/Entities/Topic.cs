@@ -1,0 +1,33 @@
+namespace YourExam.Domain.Entities;
+
+public class Topic
+{
+    /// <summary>
+    /// Khóa chính tự tăng.
+    /// </summary>
+    public int Id { get; set; }
+
+    /// <summary>
+    /// Tiêu đề của topic hỏi đáp.
+    /// </summary>
+    public string Title { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Nội dung chi tiết của topic.
+    /// </summary>
+    public string Content { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Khóa ngoại trỏ về User (Người đăng topic).
+    /// </summary>
+    public Guid AuthorId { get; set; }
+    public Profile Author { get; set; } = null!;
+
+    /// <summary>
+    /// Thời gian tạo topic.
+    /// </summary>
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    // --- Navigation properties (phục vụ Entity Framework) ---
+    public ICollection<TopicComment> Comments { get; set; } = new List<TopicComment>();
+}
