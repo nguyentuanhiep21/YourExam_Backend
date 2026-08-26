@@ -18,6 +18,11 @@ public class Topic
     public string Content { get; set; } = string.Empty;
 
     /// <summary>
+    /// Đường dẫn tới ảnh đính kèm (nếu có).
+    /// </summary>
+    public string? ImageUrl { get; set; }
+
+    /// <summary>
     /// Khóa ngoại trỏ về User (Người đăng topic).
     /// </summary>
     public Guid AuthorId { get; set; }

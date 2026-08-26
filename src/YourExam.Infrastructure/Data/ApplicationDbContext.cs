@@ -168,6 +168,7 @@ public class ApplicationDbContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Title).IsRequired().HasMaxLength(255);
             entity.Property(e => e.Content).IsRequired();
+            entity.Property(e => e.ImageUrl).HasMaxLength(1000);
 
             entity.HasOne(e => e.Author)
                   .WithMany(u => u.Topics)
