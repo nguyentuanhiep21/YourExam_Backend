@@ -35,4 +35,5 @@ public class Topic
 
     // --- Navigation properties (phục vụ Entity Framework) ---
     public ICollection<TopicComment> Comments { get; set; } = new List<TopicComment>();
+    public ICollection<SavedTopic> SavedTopics { get; set; } = new List<SavedTopic>();
 }

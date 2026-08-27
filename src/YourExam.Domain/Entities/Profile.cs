@@ -48,4 +48,5 @@ public class Profile
     public ICollection<ExamDownload> ExamDownloads { get; set; } = new List<ExamDownload>();
     public ICollection<Topic> Topics { get; set; } = new List<Topic>();
     public ICollection<TopicComment> TopicComments { get; set; } = new List<TopicComment>();
+    public ICollection<SavedTopic> SavedTopics { get; set; } = new List<SavedTopic>();
 }

@@ -19,6 +19,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<ExamDownload> ExamDownloads { get; set; } = null!;
     public DbSet<Topic> Topics { get; set; } = null!;
     public DbSet<TopicComment> TopicComments { get; set; } = null!;
+    public DbSet<SavedTopic> SavedTopics { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -191,6 +192,26 @@ public class ApplicationDbContext : DbContext
             entity.HasOne(e => e.Author)
                   .WithMany(u => u.TopicComments)
                   .HasForeignKey(e => e.AuthorId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // 11. Cấu hình bảng SavedTopic
+        modelBuilder.Entity<SavedTopic>(entity =>
+        {
+            entity.ToTable("SavedTopics");
+            entity.HasKey(e => e.Id);
+
+            // Ràng buộc Unique: Mỗi người dùng chỉ được lưu 1 topic 1 lần
+            entity.HasIndex(e => new { e.TopicId, e.UserId }).IsUnique();
+
+            entity.HasOne(e => e.Topic)
+                  .WithMany(t => t.SavedTopics)
+                  .HasForeignKey(e => e.TopicId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(e => e.User)
+                  .WithMany(u => u.SavedTopics)
+                  .HasForeignKey(e => e.UserId)
                   .OnDelete(DeleteBehavior.Cascade);
         });
     }
