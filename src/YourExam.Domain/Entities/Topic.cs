@@ -33,6 +33,11 @@ public class Topic
     /// </summary>
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+    /// <summary>
+    /// Số lượng comment của topic.
+    /// </summary>
+    public int CommentCount { get; set; } = 0;
+
     // --- Navigation properties (phục vụ Entity Framework) ---
     public ICollection<TopicComment> Comments { get; set; } = new List<TopicComment>();
     public ICollection<SavedTopic> SavedTopics { get; set; } = new List<SavedTopic>();
