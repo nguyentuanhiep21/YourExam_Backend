@@ -49,4 +49,5 @@ public class Profile
     public ICollection<Topic> Topics { get; set; } = new List<Topic>();
     public ICollection<TopicComment> TopicComments { get; set; } = new List<TopicComment>();
     public ICollection<SavedTopic> SavedTopics { get; set; } = new List<SavedTopic>();
+    public ICollection<UserDocument> UserDocuments { get; set; } = new List<UserDocument>();
 }

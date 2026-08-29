@@ -20,6 +20,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Topic> Topics { get; set; } = null!;
     public DbSet<TopicComment> TopicComments { get; set; } = null!;
     public DbSet<SavedTopic> SavedTopics { get; set; } = null!;
+    public DbSet<UserDocument> UserDocuments { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -212,6 +213,22 @@ public class ApplicationDbContext : DbContext
             entity.HasOne(e => e.User)
                   .WithMany(u => u.SavedTopics)
                   .HasForeignKey(e => e.UserId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // 12. Cấu hình bảng UserDocument
+        modelBuilder.Entity<UserDocument>(entity =>
+        {
+            entity.ToTable("UserDocuments");
+            entity.HasKey(e => e.Id);
+            
+            entity.Property(e => e.FileName).IsRequired().HasMaxLength(500);
+            entity.Property(e => e.FileUrl).IsRequired().HasMaxLength(1000);
+            entity.Property(e => e.FileType).IsRequired().HasMaxLength(50);
+            
+            entity.HasOne(e => e.Author)
+                  .WithMany(u => u.UserDocuments)
+                  .HasForeignKey(e => e.AuthorId)
                   .OnDelete(DeleteBehavior.Cascade);
         });
     }
