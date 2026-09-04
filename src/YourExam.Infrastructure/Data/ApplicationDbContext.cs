@@ -33,7 +33,6 @@ public class ApplicationDbContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Email).IsRequired().HasMaxLength(255);
             entity.Property(e => e.FullName).IsRequired().HasMaxLength(255);
-            entity.Property(e => e.PhoneNumber).HasMaxLength(20);
         });
 
         // 2. Cấu hình bảng QuestionTemplate

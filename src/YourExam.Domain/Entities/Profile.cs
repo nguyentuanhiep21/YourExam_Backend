@@ -17,10 +17,6 @@ public class Profile
     /// </summary>
     public string FullName { get; set; } = string.Empty;
     
-    /// <summary>
-    /// Số điện thoại liên hệ (Tùy chọn).
-    /// </summary>
-    public string? PhoneNumber { get; set; }
 
     /// <summary>
     /// Tên trường nơi giáo viên đang công tác (Tùy chọn).
