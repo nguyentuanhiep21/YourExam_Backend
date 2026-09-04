@@ -7,10 +7,6 @@ public class Profile
     /// </summary>
     public Guid Id { get; set; } 
 
-    /// <summary>
-    /// Địa chỉ email đăng nhập của người dùng.
-    /// </summary>
-    public string Email { get; set; } = string.Empty;
 
     /// <summary>
     /// Họ và tên hiển thị của giáo viên/người dùng.
