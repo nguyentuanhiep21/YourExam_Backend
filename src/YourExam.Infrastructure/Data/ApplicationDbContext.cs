@@ -16,6 +16,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<GeneratedExam> GeneratedExams { get; set; } = null!;
     public DbSet<GeneratedExamQuestion> GeneratedExamQuestions { get; set; } = null!;
     public DbSet<ExamVote> ExamVotes { get; set; } = null!;
+    public DbSet<ExamUpvote> ExamUpvotes { get; set; } = null!;
     public DbSet<ExamDownload> ExamDownloads { get; set; } = null!;
     public DbSet<Topic> Topics { get; set; } = null!;
     public DbSet<TopicComment> TopicComments { get; set; } = null!;
@@ -136,6 +137,27 @@ public class ApplicationDbContext : DbContext
             // Khai báo Khóa Ngoại trỏ về Profile
             entity.HasOne(e => e.User)
                   .WithMany(u => u.ExamVotes)
+                  .HasForeignKey(e => e.UserId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // 7.5. Cấu hình bảng ExamUpvote (Khóa chính kép - Composite Key)
+        modelBuilder.Entity<ExamUpvote>(entity =>
+        {
+            entity.ToTable("ExamUpvotes");
+
+            // Khai báo KHÓA CHÍNH KÉP (Gồm cả ExamId và UserId)
+            entity.HasKey(e => new { e.ExamId, e.UserId });
+
+            // Khai báo Khóa Ngoại trỏ về Exam
+            entity.HasOne(e => e.Exam)
+                  .WithMany(ex => ex.ExamUpvotes)
+                  .HasForeignKey(e => e.ExamId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            // Khai báo Khóa Ngoại trỏ về Profile
+            entity.HasOne(e => e.User)
+                  .WithMany(u => u.ExamUpvotes)
                   .HasForeignKey(e => e.UserId)
                   .OnDelete(DeleteBehavior.Cascade);
         });

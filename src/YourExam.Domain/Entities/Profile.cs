@@ -37,6 +37,7 @@ public class Profile
     // --- Navigation properties (phục vụ Entity Framework) ---
     public ICollection<GeneratedExam> GeneratedExams { get; set; } = new List<GeneratedExam>();
     public ICollection<ExamVote> ExamVotes { get; set; } = new List<ExamVote>();
+    public ICollection<ExamUpvote> ExamUpvotes { get; set; } = new List<ExamUpvote>();
     public ICollection<ExamDownload> ExamDownloads { get; set; } = new List<ExamDownload>();
     public ICollection<Topic> Topics { get; set; } = new List<Topic>();
     public ICollection<TopicComment> TopicComments { get; set; } = new List<TopicComment>();
