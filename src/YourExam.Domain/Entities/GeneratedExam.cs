@@ -91,7 +91,6 @@ public class GeneratedExam
 
     // --- Navigation properties (phục vụ Entity Framework) ---
     public ICollection<GeneratedExamQuestion> Questions { get; set; } = new List<GeneratedExamQuestion>();
-    public ICollection<ExamVote> ExamVotes { get; set; } = new List<ExamVote>();
     public ICollection<ExamUpvote> ExamUpvotes { get; set; } = new List<ExamUpvote>();
     public ICollection<ExamDownload> Downloads { get; set; } = new List<ExamDownload>();
 }
